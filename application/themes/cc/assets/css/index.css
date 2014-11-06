@@ -1,0 +1,25 @@
+body
+{
+	background: black;
+	padding-top: 2%;
+	text-align: center;
+}
+body img
+{
+	width: 450px;
+	height: 450px;
+}
+a img
+{
+	border-style: outset;
+	border-color: brown;
+}
+a
+{
+	text-decoration: none;
+	color: white;
+}
+a:hover
+{
+	color: brown;
+}
