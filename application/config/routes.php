@@ -64,6 +64,7 @@ $route['ajax/LienMort'] = "ajax_controller/LienMort";
 * routes back
 */
 $route['beyond'] = "beyond/beyond_controller";
+$route['beyond/setdatabase'] = "beyond/beyond_controller/set_database";
 
 $route['beyond/artiste'] = "beyond/artiste_controller/index";
 $route['beyond/artiste/(:num)'] = "beyond/artiste_controller/index/$1";
