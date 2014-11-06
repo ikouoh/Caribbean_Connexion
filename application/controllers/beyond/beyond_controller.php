@@ -27,4 +27,12 @@ class Beyond_controller extends Back_Controller {
 		
 	}
 
+        public function set_database(){
+		$em = $this->doctrine->em;
+		$schemaTool = new \Doctrine\ORM\Tools\SchemaTool($em);
+		$classes = $em->getMetadataFactory()->getAllMetadata();
+		//$schemaTool->dropSchema($classes);
+		//$schemaTool->createSchema($classes);
+		$schemaTool->updateSchema($classes);
+	}
 }
