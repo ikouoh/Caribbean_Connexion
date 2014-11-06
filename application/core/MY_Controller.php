@@ -26,7 +26,7 @@ class My_Controller extends CI_Controller{
 class Front_Controller extends My_Controller {
 
     function __construct() {
-        //    die("Caribbean Connexion IS DOWN");
+        //    die("MRS IS DEAD");
         parent::__construct();
 
         //set partials template
