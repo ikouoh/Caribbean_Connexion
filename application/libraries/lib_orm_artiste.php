@@ -26,6 +26,7 @@ class Lib_orm_artiste extends Lib_orm{
                 "bio" => $artiste->getBio(),
                 "image" => $artiste->getImage(),
                 "ile" => $ile->getIle(),
+                "ile_id" => $ile->getId(),
                 "voir_ile" => base_url().'ile/'.$ile->getId()
             ); 
         } else{
@@ -76,6 +77,19 @@ class Lib_orm_artiste extends Lib_orm{
 
         return implode(", ", $a_data);
 
+    }
+    
+    public function EditArtiste($data){
+        $artiste = $this->GetOne('Artiste', array('id'=> $data['id']) );
+        if(is_object($artiste) ){
+            $a_champ = array(
+                "nom" => $data['id'],
+                "bio" => $data['bio'],
+                "image" => ($data['image']!=='')?$data['image']:'artiste/'.strtolower(str_replace(' ', '', $data['nom'])).'.jpg',
+                "actif" => true
+            );
+            UpdateTable($artiste, $a_champ);
+        }
     }
 
 }

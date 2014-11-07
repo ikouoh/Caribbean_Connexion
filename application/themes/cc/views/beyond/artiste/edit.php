@@ -2,14 +2,14 @@
     <p>
             <h1><?php echo $artiste['nom']; ?></h1> <br/>	
     </p>
-    <form class="form-inline" role="form">
+    <form id="edit-artiste" class="form-inline" role="form">
         <div class="form-group">
             <label for="nom">Nom</label>
             <input type="text" class="form-control" id="nom" placeholder="<?php echo $artiste['nom']; ?>">
         </div>
         <div class="form-group">
             <label for="ile">Ile</label>
-            <?php echo form_dropdown('ile', $iles, $artiste['ile']); ?>
+            <?php echo form_dropdown('ile', $iles, $artiste['ile_id']); ?>
         </div>
         <div class="form-group">
             <label for="bio">Bio</label>

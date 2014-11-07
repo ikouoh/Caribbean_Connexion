@@ -12,6 +12,22 @@ class Ajax_controller extends Back_Controller {
 
 		echo json_encode($a_data);
 	}
+        
+        public function EditArtiste(){
+            $data = array(
+                "id" => $this->input->post('id'),
+                "nom" => $this->input->post('nom'),
+                "ile_id" => $this->input->post('ile_id'),
+                "bio" => $this->input->post('bio')
+            );
+            
+            $retour = $this->lib_orm_artiste->EditArtiste($data);
+            $a_data = array(
+                    'etat' => $retour['etat'],
+            );
+
+            echo json_encode($a_data);
+	}
 
 /*
 	public function LienMort(){

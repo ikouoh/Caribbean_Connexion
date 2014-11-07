@@ -47,7 +47,7 @@ class Lib_orm_ile extends Lib_orm{
         $a_data = array();
 
         foreach($iles as $ile){
-            $a_data[$ile->getIle()] = $ile->getIle();
+            $a_data[$ile->getId()] = $ile->getIle();
         }
         return $a_data;
     }

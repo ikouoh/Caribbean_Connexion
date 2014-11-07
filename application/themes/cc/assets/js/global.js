@@ -74,8 +74,28 @@ $(document).ready(function () {
                 if(data.etat === true){
                     location.reload();
                 }
-            },'json');
+        },'json');
         
+    });
+    
+    $('#edit-artiste').submit(function(e){
+        
+        console.log(e.target.elements);
+        
+        /**
+        $.post(base_url + "ajax/EditArtiste", {
+            id:id,
+            nom:entity,
+            ile_id:entity,
+            bio:entity
+            }, function (data) {
+
+                if(data.etat === true){
+                    location.reload();
+                }
+        },'json');
+        /**/
+        e.preventDefault();
     });
 
 });
