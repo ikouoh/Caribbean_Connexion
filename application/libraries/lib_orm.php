@@ -1,6 +1,6 @@
 <?php
 /*
-librairie d'accès à la BDD via l'orm 'doctriine'
+librairie d'accès à la BDD via l'orm 'doctrine'
 */
 
 class Lib_orm{
@@ -91,6 +91,17 @@ class Lib_orm{
         $vues = $Entity->getVues() + 1;
 
         return $this->UpdateTable($Entity, array("vues"=>$vues) );
+    }
+    
+    /*
+    * 
+    */
+    public function SwitchActive($entity, $entity_id){
+        $Entity = $this->GetOne(ucfirst($entity), array("id"=>$entity_id) );
+
+        $actif = ($Entity->getActif())?false:true;
+
+        return $this->UpdateTable($Entity, array("actif"=>$actif) );
     }
 
 

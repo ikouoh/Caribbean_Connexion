@@ -13,7 +13,7 @@ class Lib_orm_artiste extends Lib_orm{
     /*
     * fonction de réupération des infos d'un artiste à partir de son id
     */
-    public function GetArtiste($artiste_id){
+    public function GetArtiste($artiste_id, $edit=false){
         $artisteIle = $this->GetOne('ArtisteIle', array('artiste_id'=> $artiste_id) );
         $a_data = null;
         //Si l'id correspond à un artiste, on récupère ses infos
@@ -21,19 +21,33 @@ class Lib_orm_artiste extends Lib_orm{
             $artiste = $artisteIle->getArtiste();
             $ile = $artisteIle->getIle();
             $a_data = array(
+                "id" => $artiste->getId(),
                 "nom" => $artiste->getNom(),
                 "bio" => $artiste->getBio(),
                 "image" => $artiste->getImage(),
                 "ile" => $ile->getIle(),
                 "voir_ile" => base_url().'ile/'.$ile->getId()
             ); 
+        } else{
+            if($edit){
+                $artiste = $this->GetOne('Artiste', array('id'=> $artiste_id) );
+                if(is_object($artiste) ){
+                    $a_data = array(
+                        "id" => $artiste->getId(),
+                        "nom" => $artiste->getNom(),
+                        "bio" => $artiste->getBio(),
+                        "ile" => null,
+                        "image" => $artiste->getImage()
+                    );
+                }
+            }
         }
 
         return $a_data;
     }
     
-    public function GetListeArtiste($by = 'nom'){
-        $artistes = $this->GetAll('Artiste', array('actif'=>true), array($by=>'ASC') );
+    public function GetListeArtiste($by='nom', $where=array('actif'=>true)){
+        $artistes = $this->GetAll('Artiste', $where, array($by=>'ASC') );
         $a_data = array();
 
         foreach($artistes as $artiste){

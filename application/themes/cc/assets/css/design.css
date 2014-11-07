@@ -85,6 +85,12 @@ header
 	width: 50px;
 	height: 50px;
 }
+
+#corps .container
+{
+	width: 100%;
+	height: 100%;
+}
 /****************************
 	pied de page du site
 ****************************/
@@ -203,4 +209,11 @@ fieldset{
 	height: 30px; 
 	background: url(../img/prettyPhoto/default/sprite.png) 2px 1px no-repeat; 
 	cursor: pointer;
+}
+
+/*
+*   bootstrap
+*/
+.table th {
+   text-align: center;   
 }

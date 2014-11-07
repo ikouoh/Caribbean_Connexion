@@ -41,6 +41,16 @@ class Lib_orm_ile extends Lib_orm{
         }
         return $a_data;
     }
+    
+    public function GetSelectIle(){
+        $iles = $this->GetAll('Ile', array(), array('ile'=>'ASC') );
+        $a_data = array();
+
+        foreach($iles as $ile){
+            $a_data[$ile->getIle()] = $ile->getIle();
+        }
+        return $a_data;
+    }
 
     public function GetArtistesIle($ile_id){
         $artistesIle = $this->GetAll('ArtisteIle', array('ile_id' => $ile_id) );
