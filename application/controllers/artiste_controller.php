@@ -12,7 +12,7 @@ class Artiste_controller extends Front_Controller {
 		} else{
 			$a_data["liste"] =  false;
 			$a_data["artiste"] = $this->lib_orm_artiste->GetArtiste($artiste_id);
-			$a_data["clips"] = $this->lib_orm_clip->GetClipByArtiste($artiste_id);;
+			$a_data["clips"] = $this->lib_orm_clip->GetClipByArtiste($artiste_id);
 			
 			if(is_null($a_data["artiste"]) ){
 				redirect('artiste', 'refresh');

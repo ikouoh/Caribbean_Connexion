@@ -34,5 +34,9 @@ class Beyond_controller extends Back_Controller {
 		//$schemaTool->dropSchema($classes);
 		//$schemaTool->createSchema($classes);
 		$schemaTool->updateSchema($classes);
+                
+                $this->template->title('Beyond','Caribbean', 'Connexion');
+		$this->template->set_partial('content','beyond/setdata', array());
+		$this->template->build('beyond/beyond_template');
 	}
 }

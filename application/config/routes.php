@@ -69,22 +69,22 @@ $route['beyond/setdatabase'] = "beyond/beyond_controller/set_database";
 $route['beyond/artiste'] = "beyond/artiste_controller/index";
 $route['beyond/artiste/(:num)'] = "beyond/artiste_controller/index/$1";
 $route['beyond/artiste/edit/(:num)'] = "beyond/artiste_controller/edit/$1";
-$route['beyond/artiste/new'] = "beyond/artiste_controller/new";
+$route['beyond/artiste/new'] = "beyond/artiste_controller/newArtiste";
 
 $route['beyond/clip'] = "beyond/clip_controller/index";
 $route['beyond/clip/(:num)'] = "beyond/clip_controller/index/$1";
 $route['beyond/clip/edit/(:num)'] = "beyond/clip_controller/edit/$1";
-$route['beyond/clip/new'] = "beyond/clip_controller/new";
+$route['beyond/clip/new'] = "beyond/clip_controller/newClip";
 
 $route['beyond/genre'] = "beyond/genre_controller/index";
 $route['beyond/genre/(:num)'] = "beyond/genre_controller/index/$1";
 $route['beyond/genre/edit/(:num)'] = "beyond/genre_controller/edit/$1";
-$route['beyond/genre/new'] = "beyond/genre_controller/new";
+$route['beyond/genre/new'] = "beyond/genre_controller/newGenre";
 
 $route['beyond/ile'] = "beyond/ile_controller/index";
 $route['beyond/ile/(:num)'] = "beyond/ile_controller/index/$1";
 $route['beyond/ile/edit/(:num)'] = "beyond/ile_controller/edit/$1";
-$route['beyond/ile/new'] = "beyond/ile_controller/new";
+$route['beyond/ile/new'] = "beyond/ile_controller/newIle";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

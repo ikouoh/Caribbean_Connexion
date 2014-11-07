@@ -32,16 +32,18 @@ class Lib_orm_artiste extends Lib_orm{
         return $a_data;
     }
     
-    public function GetListeArtiste(){
-        $artistes = $this->GetAll('Artiste', array('actif'=>true), array('nom'=>'ASC') );
+    public function GetListeArtiste($by = 'nom'){
+        $artistes = $this->GetAll('Artiste', array('actif'=>true), array($by=>'ASC') );
         $a_data = array();
 
         foreach($artistes as $artiste){
             $a_data[] = array(
                 "id"  => $artiste->getId(),
                 "nom" => $artiste->getNom(),
-                "bio" => $artiste->getBio(),
-                "voir_artiste" => base_url().'artiste/'.$artiste->getId()
+                "actif" => $artiste->getActif(),
+                "vue" => $artiste->getVues(),
+                "voir_artiste" => base_url().'artiste/'.$artiste->getId(),
+                "edit_artiste" => base_url().'beyond/artiste/edit/'.$artiste->getId()
             );
         }
         return $a_data;
