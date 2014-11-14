@@ -26,7 +26,7 @@ class Ajax_controller extends Back_Controller {
                     'etat' => $retour['etat'],
             );
 
-            echo json_encode($a_data);
+            echo json_encode($retour);
 	}
 
 /*

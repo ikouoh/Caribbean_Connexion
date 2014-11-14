@@ -60,6 +60,7 @@ $route['recherche/(:any)'] = "recherche_controller/index/$1";
 $route['ajax/AddVueClip'] = "ajax_controller/AddVueClip";
 $route['ajax/LienMort'] = "ajax_controller/LienMort";
 $route['ajax/SwitchActive'] = "beyond/ajax_controller/SwitchActive";
+$route['ajax/EditArtiste'] = "beyond/ajax_controller/EditArtiste";
 
 /*
 * routes back

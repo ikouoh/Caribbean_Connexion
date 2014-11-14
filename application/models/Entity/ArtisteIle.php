@@ -50,13 +50,13 @@ class ArtisteIle
     * setters
     */
 
-    public function setArtiste(Object $nom = null){
-        $this->nom = $nom;
+    public function setArtiste(Artiste $artiste_id= null){
+        $this->artiste_id = $artiste_id;
         return $this;
     }
 
-    public function setIle($ile = null){
-        $this->ile = $ile;
+    public function setIle(Ile $ile = null){
+        $this->ile_id = $ile;
         return $this;
     }
 

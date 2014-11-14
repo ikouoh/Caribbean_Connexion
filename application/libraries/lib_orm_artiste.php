@@ -37,7 +37,8 @@ class Lib_orm_artiste extends Lib_orm{
                         "id" => $artiste->getId(),
                         "nom" => $artiste->getNom(),
                         "bio" => $artiste->getBio(),
-                        "ile" => null,
+                        "ile" => 0,
+                        "ile_id" => 0,
                         "image" => $artiste->getImage()
                     );
                 }
@@ -81,14 +82,43 @@ class Lib_orm_artiste extends Lib_orm{
     
     public function EditArtiste($data){
         $artiste = $this->GetOne('Artiste', array('id'=> $data['id']) );
+        $ile = $this->GetOne('Ile', array('id'=> $data['ile_id']) );
+        $artisteIle = $this->GetOne('ArtisteIle', array('artiste_id'=> $data['id']) );
+        $a_data = array();
         if(is_object($artiste) ){
             $a_champ = array(
-                "nom" => $data['id'],
+                "nom" => $data['nom'],
                 "bio" => $data['bio'],
-                "image" => ($data['image']!=='')?$data['image']:'artiste/'.strtolower(str_replace(' ', '', $data['nom'])).'.jpg',
+                "image" => (isset($data['image']))?$data['image']:'artiste/'.strtolower(str_replace(' ', '', $data['nom'])).'.jpg',
                 "actif" => true
             );
-            UpdateTable($artiste, $a_champ);
+            if(is_object($ile) ){
+                $this->EditIle($artiste, $ile, $artisteIle);
+            } else{
+                $this->RemoveIle($artisteIle);
+            }
+            $a_data = $this->UpdateTable($artiste, $a_champ);
+        }
+        return $a_data;
+    }
+    
+    public function EditIle($artiste, $ile, $artisteIle){
+        if(is_object($artisteIle) ){
+            if($artisteIle->getIle()->getId() !== $ile->getId() ){
+                $artisteIle->setIle($ile);
+                $this->em->merge($artisteIle);
+            }
+        } else{
+            $artisteIle = $this->NewEntity("ArtisteIle");
+            $artisteIle->setArtiste($artiste);
+            $artisteIle->setIle($ile);
+            $this->em->persist($artisteIle);
+        }
+    }
+    
+    public function RemoveIle($artisteIle){
+        if(is_object($artisteIle) ){
+            $this->em->remove($artisteIle);
         }
     }
 

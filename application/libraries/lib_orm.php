@@ -12,6 +12,11 @@ class Lib_orm{
         $this->em = $this->ci->doctrine->em;
     }
 
+    public function NewEntity($Entity){
+        $class = 'Entity\\'.$Entity;
+        return new $class;
+    }
+    
     /*
     * Méthodes de récupéreration des objets depuis la BDD
     */
@@ -67,8 +72,8 @@ class Lib_orm{
             $this->em->flush();
         }
         catch (Exception $e) {
-        $etat = False;
-        $message = 'Un problème est survenu';
+            $etat = False;
+            $message = 'Un problème est survenu : '.$e;
         }
 
         $retour = array(

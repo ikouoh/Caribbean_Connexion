@@ -4,34 +4,32 @@ $(document).ready(function () {
     $("a[rel^='prettyPhoto']").on('click',function(){
             var clipid = $(this).data('clipid');
             $('#clipid').val(clipid);
-            //$('.pp_deadLink').attr('clip_id').val(clipid);
     });
 
 
     $("a[rel^='prettyPhoto']").prettyPhoto({
-            changepicturecallback:function(){
-                    var clipid = $('#clipid').val();
-                    $('a.pp_deadLink').bind('click',function(){
-                            //APPEL AJAX COMPTEUR VUE CLIP
-                            $.post(base_url + "ajax/LienMort", {
-                    clipid:clipid
-                }, function (data) {
-                    if(data.etat == true){
-                        //fermeture de PrettyPhoto
-                        location.reload();
-                        //$.prettyPhoto.close();
-                        //message de remerciement
+        changepicturecallback:function(){
+            $('a.pp_deadLink').bind('click',function(){
+                var clipid = $('#clipid').val();  
+                //APPEL AJAX COMPTEUR VUE CLIP
+                    $.post(base_url + "ajax/LienMort", {
+                        clipid:clipid
+                    }, function (data) {
+                        if(data.etat == true){
+                            // reload la page
+                            location.reload();
+                            //$.prettyPhoto.close();
+                            //message de remerciement
+                        }
+                    },'json');
+            });
+        },
 
-                    }
-                },'json');
-                    });
-            },
+        ajaxcallback:function(){
+        var clipid = $('#clipid').val();
 
-            ajaxcallback:function(){
-            var clipid = $('#clipid').val();
-
-            //APPEL AJAX COMPTEUR VUE CLIP
-            $.post(base_url + "ajax/AddVueClip", {
+        //APPEL AJAX COMPTEUR VUE CLIP
+        $.post(base_url + "ajax/AddVueClip", {
             clipid:clipid
             }, function (data) {
 
@@ -39,28 +37,9 @@ $(document).ready(function () {
                     //
                 }
             },'json');
-            }
+        }
     });
 
-
-    $('.pp_social').on('click','.pp_deadLink',function(){
-            var clipid = $('#clipid').val();
-            console.log(clipid);
-            /*
-            //APPEL AJAX COMPTEUR VUE CLIP
-            $.post(base_url + "ajax/LienMort", {
-            clipid:clipid
-        }, function (data) {
-            console.log('dans fonction ' + clipid);
-            if(data.etat == true){
-                //fermeture de PrettyPhoto
-                $.prettyPhoto.close();
-                //message de remerciement
-
-            }
-        },'json');
-            */
-    });
 
     $('.actif-art').click(function(e){
         console.log($(this));
@@ -79,17 +58,22 @@ $(document).ready(function () {
     });
     
     $('#edit-artiste').submit(function(e){
+        var id_form = $(this).attr('id');
+        var id = $('#'+id_form+' #id_artiste').val();
+        var nom = $('#'+id_form+' #nom').val();
+        var ile = $('#'+id_form+' #ile').val();
+        var bio = $('#'+id_form+' #bio').val();
         
-        console.log(e.target.elements);
         
-        /**
+        
+        /**/
         $.post(base_url + "ajax/EditArtiste", {
             id:id,
-            nom:entity,
-            ile_id:entity,
-            bio:entity
+            nom:nom,
+            ile_id:ile,
+            bio:bio
             }, function (data) {
-
+                console.log(data);
                 if(data.etat === true){
                     location.reload();
                 }

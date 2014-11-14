@@ -44,7 +44,9 @@ class Lib_orm_ile extends Lib_orm{
     
     public function GetSelectIle(){
         $iles = $this->GetAll('Ile', array(), array('ile'=>'ASC') );
-        $a_data = array();
+        $a_data = array(
+            0 => 'Aucune'
+        );
 
         foreach($iles as $ile){
             $a_data[$ile->getId()] = $ile->getIle();

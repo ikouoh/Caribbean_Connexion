@@ -109,10 +109,12 @@ a
 {
 	text-decoration: none;
 	color: olive;
+        font-size: 1.4em;
 }
 a:hover
 {
-	text-shadow: 2px 2px 2px #555;
+    color: olive;
+    text-shadow: 2px 2px 2px #555;
 } 
 /******************************
 	autres détails du site

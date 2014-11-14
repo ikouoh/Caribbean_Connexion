@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <title><?php echo $template['title']; ?></title>
+  <?php echo theme_css('bootstrap', true); ?>
   <?php echo theme_css('design', true); ?>
   <?php echo theme_css('prettyPhoto', true); ?>
-  <?php echo theme_css('bootstrap', true); ?>
   <?php echo theme_js('jquery', true); ?>
   <?php echo theme_js('jqueryui', true); ?>
   <?php echo theme_js('jquery.prettyPhoto', true); ?>
