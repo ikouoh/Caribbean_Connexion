@@ -61,6 +61,9 @@ $route['ajax/AddVueClip'] = "ajax_controller/AddVueClip";
 $route['ajax/LienMort'] = "ajax_controller/LienMort";
 $route['ajax/SwitchActive'] = "beyond/ajax_controller/SwitchActive";
 $route['ajax/EditArtiste'] = "beyond/ajax_controller/EditArtiste";
+$route['ajax/EditGenre'] = "beyond/ajax_controller/EditGenre";
+$route['ajax/EditIle'] = "beyond/ajax_controller/EditIle";
+$route['ajax/EditClip'] = "beyond/ajax_controller/EditClip";
 
 /*
 * routes back

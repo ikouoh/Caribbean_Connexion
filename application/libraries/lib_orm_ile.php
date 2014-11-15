@@ -22,21 +22,28 @@ class Lib_orm_ile extends Lib_orm{
             $a_data = array(
                 "id" => $ile_id,
                 "ile" => $ile->getIle(),
-                "descriptif" => $ile->getDescriptif()
+                "descriptif" => $ile->getDescriptif(),
+                "vue" => $ile->getVues(),
+                "image" => $ile->getImage()
             );
         }
         return $a_data;
     }
     
-    public function GetListeIle(){
-        $iles = $this->GetAll('Ile', array('actif'=>true), array('ile'=>'ASC') );
+    public function GetListeIle($by='ile', $where=array('actif'=>true)){
+        $iles = $this->GetAll('Ile', $where, array($by=>'ASC') );
         $a_data = array();
 
         foreach($iles as $ile){
             $a_data[] = array(
                 "id"  => $ile->getId(),
                 "ile" => $ile->getIle(),
-                "voir_ile" => base_url().'ile/'.$ile->getId()
+                "actif" => $ile->getActif(),
+                "vue" => $ile->getVues(),
+                "descriptif" => $ile->getDescriptif(),
+                "image" => $ile->getImage(),
+                "voir_ile" => base_url().'ile/'.$ile->getId(),
+                "edit_ile" => base_url().'beyond/ile/edit/'.$ile->getId()
             );
         }
         return $a_data;
@@ -74,26 +81,22 @@ class Lib_orm_ile extends Lib_orm{
     }
 
     public function GetClipsIle($ile_id){
-        /*
-        $artistesIle = $this->GetAll('ArtisteIle', array('ile_id' => $ile_id) );
-        $a_artistes = $a_clips = array();
-
-        //Si l'ile comporte des artistes, on récupère ceux-ci
-        if(!empty($artistesIle) ){
-            foreach($artistesIle as $artisteIle){
-                $artiste = $artisteIle->getArtiste();
-                $a_artistes[] = $artiste->getId();
-            }
-        }
-
-        //Si on a recupéré des artistes correspondant à l'ile, on récupère leurs clips associés
-        if(!empty($a_artistes) ){
-            $this->ci->load->library('lib_orm_clip');
-            $a_clips = $this->ci->lib_orm_clip->GetClipByArtiste($a_artistes); 
-        }
-        return $a_clips;
-*/
         return $this->ci->doctrine->em->getRepository('Entity\Clip')->GetClip(null, null, null, $ile_id, null, 'c.annee');
+    }
+    
+    public function EditIle($data){
+        $ile = $this->GetOne('Ile', array('id'=> $data['id']) );
+        $a_data = array();
+        if(is_object($ile) ){
+            $a_champ = array(
+                "ile" => $data['ile'],
+                "descriptif" => $data['descriptif'],
+                "image" => (isset($data['image']))?$data['image']:'ile/'.strtolower(str_replace(' ', '', $data['ile'])).'.jpg',
+                "actif" => true
+            );
+            $a_data = $this->UpdateTable($ile, $a_champ);
+        }
+        return $a_data;
     }
 
 }

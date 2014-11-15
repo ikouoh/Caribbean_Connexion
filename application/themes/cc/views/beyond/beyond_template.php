@@ -10,7 +10,7 @@
   <?php echo theme_js('jqueryui', true); ?>
   <?php echo theme_js('jquery.prettyPhoto', true); ?>
   <?php echo theme_js('bootstrap', true); ?>
-  <?php echo theme_js('global', true); ?>
+  <?php echo theme_js('beyond', true); ?>
   <link rel="shortcut icon" href="<?php echo img_url('icone.ico'); ?>" type="image/x-icon" /> 
 </head>
 

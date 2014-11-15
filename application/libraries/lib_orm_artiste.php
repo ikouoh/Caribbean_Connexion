@@ -96,6 +96,7 @@ class Lib_orm_artiste extends Lib_orm{
                 $this->EditIle($artiste, $ile, $artisteIle);
             } else{
                 $this->RemoveIle($artisteIle);
+                $a_champ["actif"] = false;
             }
             $a_data = $this->UpdateTable($artiste, $a_champ);
         }

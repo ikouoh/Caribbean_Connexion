@@ -22,23 +22,29 @@ class Ajax_controller extends Back_Controller {
             );
             
             $retour = $this->lib_orm_artiste->EditArtiste($data);
-            $a_data = array(
-                    'etat' => $retour['etat'],
-            );
-
             echo json_encode($retour);
 	}
 
-/*
-	public function LienMort(){
-		$clip_id        = $this->input->post('clipid');
-		$retour = $this->lib_orm_clip->LienMort($clip_id);
-		$a_data = array(
-			'etat' => $retour['etat'],
-			'test' => "test",
-		);
-		
-		echo json_encode($a_data);
+        public function EditGenre(){
+            $data = array(
+                "id" => $this->input->post('id'),
+                "genre" => $this->input->post('genre'),
+                "descriptif" => $this->input->post('descriptif')
+            );
+            
+            $retour = $this->lib_orm_genre->EditGenre($data);
+            echo json_encode($retour);
 	}
-*/
+        
+        public function EditIle(){
+            $data = array(
+                "id" => $this->input->post('id'),
+                "ile" => $this->input->post('ile'),
+                "descriptif" => $this->input->post('descriptif')
+            );
+            
+            $retour = $this->lib_orm_ile->EditIle($data);
+            echo json_encode($retour);
+	}
+        
 }
