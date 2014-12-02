@@ -2,8 +2,7 @@
 
 class Welcome extends Front_Controller {	
 
-	public function index()
-	{
+	public function index(){
 		$a_data = array(
 			"plus_vues" => $this->em->getRepository('Entity\Clip')->GetClip(null, null, null, null, null, 'c.vues DESC', 5, null),
 		);

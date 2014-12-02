@@ -1,25 +1,30 @@
 <?php
 /*
-librairie d'accès à la BDD via l'orm 'doctriine'
-*/
+ * Librairie de gestion des 'clips'
+ * @author i.kouoh
+ * dernière édition 02/12/2014
+ */
 
 class Lib_orm_clip extends Lib_orm{
 
-	public function __construct() {
+    public function __construct() {
 
         parent::__construct();
     }
 
+    /*
+     * A SUPPRIMER
+     */
     public function GetClip($a_values = array() ){
     	$clips = $this->GetAll('Clip', $a_values);
     	$a_data = null;
-/*
-    	if(){
 
-    	}
-    	*/
     }
 
+    /*
+     * Récupération des infos d'un clip
+     * @param Clip $clip
+     */
     public function GetInfosClip($clip){
         $data = null;
         if(is_object($clip) ){
@@ -36,20 +41,32 @@ class Lib_orm_clip extends Lib_orm{
         return $data;
     }
 
+    /*
+     * Récupération des clips d'un artiste
+     * @param int $artiste_id
+     */
     public function GetClipByArtiste($artiste_id){	
-        $a_clips = array(); 
-    	 
         return $this->ci->doctrine->em->getRepository('Entity\Clip')->GetClip(null, $artiste_id, null, null, null, 'c.annee', null,  null);  
     }
 
+    /*
+     * Récupération des clips d'un genre
+     * @param int $genre_id
+     */
     public function GetClipByGenre($genre_id){
         return $this->ci->doctrine->em->getRepository('Entity\Clip')->GetClip(null, null, $genre_id, null, null, 'c.annee');
     }
 
+    /*
+     * Récupération de la liste des années des clips
+     */
     public function GetAnnee(){
         return $this->ci->doctrine->em->getRepository('Entity\Clip')->GetAnnee();
     }
 
+    /*
+     * A SUPPRIMER, UTILISER FCT DANS LIB_ORM
+     */
     public function AddVueClip($clip_id){
         $clip = $this->GetOne('Clip', array("id"=>$clip_id) );
 
@@ -58,6 +75,9 @@ class Lib_orm_clip extends Lib_orm{
         return $this->UpdateTable($clip, array("vues"=>$vues) );
     }
 
+    /*
+     * UTILISER FCT DANS LIB_ORM
+     */
     public function LienMort($clip_id){
         $clip = $this->GetOne('Clip', array("id"=>$clip_id) );
 

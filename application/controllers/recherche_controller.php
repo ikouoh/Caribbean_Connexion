@@ -2,8 +2,7 @@
 
 class Recherche_controller extends Front_Controller {	
 
-	public function index($titre = null, $artiste = null, $ile = null, $genre = null, $annee = null)
-	{
+	public function index($titre = null, $artiste = null, $ile = null, $genre = null, $annee = null){
 		$a_data = array();
 		$a_data['recherche'] = array(
 			"titre" => $titre,
@@ -28,6 +27,7 @@ class Recherche_controller extends Front_Controller {
 		
 	}
 
+        
 	public function resultat(){
 		$titre = $artiste = $ile = $genre = $annee = null;
 		if(isset($_POST) ){
