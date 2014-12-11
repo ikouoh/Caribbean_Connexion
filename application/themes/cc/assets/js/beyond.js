@@ -41,7 +41,33 @@ $(document).ready(function () {
         },'json');
         e.preventDefault();
     });
+    /*
+     * 
+     */
+    $('#new-artiste').submit(function(e){
+        var id_form = $(this).attr('id');
+        var nom = $('#'+id_form+' #nom').val();
+        var ile = $('#'+id_form+' #ile').val();
+        var bio = $('#'+id_form+' #bio').val();
+        
+        $.post(base_url + "ajax/NewArtiste", {
+            nom:nom,
+            ile_id:ile,
+            bio:bio
+            }, function (data) { 
+                if(data.etat === true){
+                    location.replace(base_url+"beyond/artiste");
+                } else{
+                    console.log(data);
+                    //location.reload();
+                }
+        },'json');
+        e.preventDefault();
+    });
     
+    /*
+     * 
+     */
     $('#edit-genre').submit(function(e){
         var id_form = $(this).attr('id');
         var id = $('#'+id_form+' #id_genre').val();
@@ -62,7 +88,31 @@ $(document).ready(function () {
         },'json');
         e.preventDefault();
     });
+    /*
+     * 
+     */
+    $('#new-genre').submit(function(e){
+        var id_form = $(this).attr('id');
+        var genre = $('#'+id_form+' #genre').val();
+        var descriptif = $('#'+id_form+' #descriptif').val();
+        
+        $.post(base_url + "ajax/NewGenre", {
+            genre:genre,
+            descriptif:descriptif
+            }, function (data) { 
+                if(data.etat === true){
+                    location.replace(base_url+"beyond/genre");
+                } else{
+                    console.log(data);
+                    //location.reload();
+                }
+        },'json');
+        e.preventDefault();
+    });
     
+    /*
+     * 
+     */
     $('#edit-ile').submit(function(e){
         var id_form = $(this).attr('id');
         var id = $('#'+id_form+' #id_ile').val();
@@ -83,7 +133,31 @@ $(document).ready(function () {
         },'json');
         e.preventDefault();
     });
+    /*
+     * 
+     */
+    $('#new-ile').submit(function(e){
+        var id_form = $(this).attr('id');
+        var ile = $('#'+id_form+' #ile').val();
+        var descriptif = $('#'+id_form+' #descriptif').val();
+        
+        $.post(base_url + "ajax/NewIle", {
+            ile:ile,
+            descriptif:descriptif
+            }, function (data) { 
+                if(data.etat === true){
+                    location.replace(base_url+"beyond/ile");
+                } else{
+                    console.log(data);
+                    //location.reload();
+                }
+        },'json');
+        e.preventDefault();
+    });
     
+    /*
+     * 
+     */
     $('#edit-clip').submit(function(e){
         var id_form = $(this).attr('id');
         var id = $('#'+id_form+' #id_artiste').val();

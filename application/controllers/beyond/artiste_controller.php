@@ -26,10 +26,12 @@ class Artiste_controller extends Back_Controller {
 	}
         
         public function newArtiste(){
-		//$a_data["info"] = $this->lib_orm_artiste->GetArtiste($artiste_id);
+		$a_data = array(
+                    "iles" => $this->lib_orm_ile->GetSelectIle()
+                );
 
 		$this->template->title('Caribbean', 'Connexion');
-		$this->template->set_partial('content','beyond/artiste/new', array());
+		$this->template->set_partial('content','beyond/artiste/new', $a_data);
 		$this->template->build('beyond/beyond_template');
 	}
 }

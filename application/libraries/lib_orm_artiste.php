@@ -157,6 +157,40 @@ class Lib_orm_artiste extends Lib_orm{
             $this->em->remove($artisteIle);
         }
     }
+    
+    /*
+     * Ajout d'un nouvel artiste
+     * @param array $data
+     */
+    public function NewArtiste($data){
+        $artiste = $this->GetOne('Artiste', array('nom'=> $data['nom']) );
+        $a_data = array('etat' => false);
+        
+        // Si l'artiste n'existe pas déjà dans la BDD, on peut l'ajouter
+        if(!is_object($artiste) ){
+            $ile = $this->GetOne('Ile', array('id'=> $data['ile_id']) );
+            $artiste = $this->NewEntity("Artiste");
+            $artiste->setVues(0);
+            $artiste->setActif(false);
+            $this->em->persist($artiste);
+            
+            $a_champ = array(
+                "nom" => $data['nom'],
+                "bio" => $data['bio'],
+                "image" => (isset($data['image']))?$data['image']:'artiste/'.strtolower(str_replace(' ', '', $data['nom'])).'.jpg'
+            );            
+            
+            //Si l'id correspond à une ile, on édite celle-ci
+            if(is_object($ile) ){
+                $this->EditIle($artiste, $ile, null);
+                $a_champ['actif'] = true;
+            }
+            
+            $a_data = $this->UpdateTable($artiste, $a_champ);
+        } 
+        
+        return $a_data;
+    }
 
 }
 ?>

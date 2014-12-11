@@ -89,6 +89,32 @@ class Lib_orm_genre extends Lib_orm{
         return $a_data;
     }
     
+    /*
+     * Ajout d'un nouveau genre
+     * @param array $data
+     */
+    public function NewGenre($data){
+        $genre = $this->GetOne('Genre', array('genre'=> $data['genre']) );
+        $a_data = array('etat' => false);
+        
+        //Si le genre n'existe pas déjà dans la BDD, on peut l'ajouter
+        if(!is_object($genre) ){
+            $genre = $this->NewEntity("Genre");
+            $genre->setVues(0);
+            $genre->setActif(true);
+            $this->em->persist($genre);
+            
+            $a_champ = array(
+                "genre" => $data['genre'],
+                "descriptif" => $data['descriptif'],
+                "image" => (isset($data['image']))?$data['image']:'genre/'.strtolower(str_replace(' ', '', $data['genre'])).'.jpg'
+            );
+            
+            $a_data = $this->UpdateTable($genre, $a_champ);
+        }
+        return $a_data;
+    }
+    
     
 }
 ?>

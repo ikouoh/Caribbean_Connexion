@@ -2,7 +2,7 @@
     <p>
             <h1><?php echo $artiste['nom']; ?></h1> <br/>	
     </p>
-    <form id="edit-artiste" class="form-inline" role="form">
+    <form id="edit-artiste" class="form" role="form">
         <div class="form-group">
             <label for="nom">Nom</label>
             <input type="text" class="form-control" id="nom" value="<?php echo $artiste['nom']; ?>" placeholder="nom">

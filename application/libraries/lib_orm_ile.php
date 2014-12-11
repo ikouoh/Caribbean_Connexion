@@ -122,6 +122,32 @@ class Lib_orm_ile extends Lib_orm{
         }
         return $a_data;
     }
+    
+    /*
+     * Ajout d'une nouvelle ile
+     * @param array $data
+     */
+    public function NewIle($data){
+        $ile = $this->GetOne('Ile', array('ile'=> $data['ile']) );
+        $a_data = array('etat' => false);
+        
+        //Si le genre n'existe pas déjà dans la BDD, on peut l'ajouter
+        if(!is_object($ile) ){
+            $ile = $this->NewEntity("Ile");
+            $ile->setVues(0);
+            $ile->setActif(true);
+            $this->em->persist($ile);
+            
+            $a_champ = array(
+                "ile" => $data['ile'],
+                "descriptif" => $data['descriptif'],
+                "image" => (isset($data['image']))?$data['image']:'ile/'.strtolower(str_replace(' ', '', $data['ile'])).'.jpg'
+            );
+            
+            $a_data = $this->UpdateTable($ile, $a_champ);
+        }
+        return $a_data;
+    }
 
 }
 ?>
