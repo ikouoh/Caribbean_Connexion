@@ -1,17 +1,20 @@
 <?php
 /*
-librairie d'accès à la BDD via l'orm 'doctriine'
-*/
+ * Librairie de gestion des 'genres'
+ * @author i.kouoh
+ * dernière édition 02/12/2014
+ */
 
 class Lib_orm_genre extends Lib_orm{
 
-	public function __construct() {
+    public function __construct() {
 
         parent::__construct();
     }
 
-    /*
-    * fonction de réupération des infos d'un artiste à partir de son id
+   /*
+    * Récupération des infos d'un artiste à partir de son id
+    * @param int $genre_id
     */
     public function GetGenre($genre_id){
         $genre = $this->GetOne('Genre', array('id'=> $genre_id) );
@@ -26,10 +29,14 @@ class Lib_orm_genre extends Lib_orm{
                 "image" => $genre->getImage()
             ); 
         }
-
         return $a_data;
     }
     
+    /*
+     * Récupération de la liste des genres
+     * @param String $by
+     * @param array $where
+     */
     public function GetListeGenre($by='genre', $where=array('actif'=>true)){
         $genres = $this->GetAll('Genre', $where, array($by=>'ASC') );
         $a_data = array();
@@ -47,6 +54,9 @@ class Lib_orm_genre extends Lib_orm{
         return $a_data;
     }
 
+    /*
+     * A SUPPRIMER 
+     */
     public function GetArtistesClip($clip_id){
         $a_data = array();
         $artistesClip = $this->GetAll('ArtisteClip', array('clip_id'=> $clip_id) );
@@ -59,9 +69,14 @@ class Lib_orm_genre extends Lib_orm{
         return implode(", ", $a_data);
     }
 
+    /*
+     * Edition d'un genre
+     * @param array $data
+     */
     public function EditGenre($data){
         $genre = $this->GetOne('Genre', array('id'=> $data['id']) );
         $a_data = array();
+        //Si l'id correspond à un genre, on modifie ses données avec les nouvelles données
         if(is_object($genre) ){
             $a_champ = array(
                 "genre" => $data['genre'],

@@ -1,26 +1,31 @@
 <?php
 /*
-librairie d'accès à la BDD via l'orm 'doctrine'
-*/
+ * Librairie d'accès à la BDD via l'orm 'doctrine'
+ * @author i.kouoh
+ * dernière édition 02/12/2014
+ */
 
 class Lib_orm{
 
-	public function __construct() {
+    public function __construct() {
 
         $this->ci = &get_instance();
         $this->ci->load->library('doctrine');
         $this->em = $this->ci->doctrine->em;
     }
 
+    /*
+     * Création d'une nouvelle entité
+     * @param String $Entity
+     */
     public function NewEntity($Entity){
         $class = 'Entity\\'.$Entity;
         return new $class;
     }
     
-    /*
-    * Méthodes de récupéreration des objets depuis la BDD
+   /*
+    * Récupéreration d'une entité depuis la BDD
     */
-
     public function GetOne($Entity, $a_values){
         $a_values = (empty($a_values) )? array(): $a_values;
         $ObjetEntity = $this->em->getRepository('Entity\\'.ucfirst($Entity))->findOneBy($a_values); 
@@ -28,16 +33,18 @@ class Lib_orm{
         return $ObjetEntity;
     }
     
+    /*
+     * Récupéreration de plusieurs entités depuis la BDD
+     */
     public function GetAll($Entity, $a_values = array(), $a_order = array('id'=>'ASC'), $nb = null, $offset = null){
         $ObjetEntity = $this->em->getRepository('Entity\\'.ucfirst($Entity))->findBy($a_values, $a_order, $nb, $offset);
 
         return $ObjetEntity;
     }
 
-    /*
-    *   Mise à jour d'un ou plusieurs champs
-    **/
-
+   /*
+    *   Mise à jour d'un ou plusieurs champs dans la BDD
+    */
     public function setChamp($Entity,$a_champ){
         // Passage en paramètre de l'objet Entity et tu tableau de champ => valeur
         $etat = True;
@@ -62,6 +69,9 @@ class Lib_orm{
         return $Entity;
     }
 
+    /*
+     * MAJ d'une entité dans la BDD
+     */
     public function UpdateTable($Entity,$a_champ){
         
         $etat = True;
@@ -87,7 +97,7 @@ class Lib_orm{
     }
 
 
-    /*
+   /*
     * 
     */
     public function AddVue($entity, $entity_id){
@@ -98,7 +108,7 @@ class Lib_orm{
         return $this->UpdateTable($Entity, array("vues"=>$vues) );
     }
     
-    /*
+   /*
     * 
     */
     public function SwitchActive($entity, $entity_id){
