@@ -27,7 +27,10 @@
             <td><?php echo $artiste['nom']; ?></td>
             <td><?php echo $artiste['vue']; ?></td>
             <td><a href="" data-entity="Artiste" data-id="<?php echo $artiste['id']; ?>" class="switch-actif btn btn-<?php echo ($artiste['actif'])?'success':'danger'; ?>">actif</a></td>
-            <td><a href="<?php echo $artiste['edit_artiste']; ?>" >éditer</a></td>
+            <td>
+                <a href="<?php echo $artiste['edit_artiste']; ?>" class="btn btn-info" >éditer</a>
+                <a href="" data-entity="Artiste" data-id="<?php echo $artiste['id']; ?>" class="delete-entity btn btn-info" >supprimer</a>
+            </td>
         </tr>
     <?php endforeach; ?>
         </tbody>

@@ -27,7 +27,10 @@
             <td><?php echo $ile['ile']; ?></td>
             <td><?php echo $ile['vue']; ?></td>
             <td><a href="" data-entity="Ile" data-id="<?php echo $ile['id']; ?>" class="switch-actif btn btn-<?php echo ($ile['actif'])?'success':'danger'; ?>">actif</a></td>
-            <td><a href="<?php echo $ile['edit_ile']; ?>" >éditer</a></td>
+            <td>
+                <a href="<?php echo $ile['edit_ile']; ?>" class="btn btn-info" >éditer</a>
+                <a href="" data-entity="Ile" data-id="<?php echo $ile['id']; ?>" class="delete-entity btn btn-info" >supprimer</a>
+            </td>
         </tr>
     <?php endforeach; ?>
         </tbody>

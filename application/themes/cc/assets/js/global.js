@@ -11,7 +11,8 @@ $(document).ready(function () {
         changepicturecallback:function(){
             $('a.pp_deadLink').bind('click',function(){
                 var clipid = $('#clipid').val();  
-                //APPEL AJAX COMPTEUR VUE CLIP
+                if(confirm("Confirmez que ce lien est mort") ){
+                    //APPEL AJAX COMPTEUR VUE CLIP
                     $.post(base_url + "ajax/LienMort", {
                         clipid:clipid
                     }, function (data) {
@@ -22,6 +23,7 @@ $(document).ready(function () {
                             //message de remerciement
                         }
                     },'json');
+                }
             });
         },
 

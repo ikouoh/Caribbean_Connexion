@@ -191,6 +191,74 @@ class Lib_orm_artiste extends Lib_orm{
         
         return $a_data;
     }
-
+    
+    /*
+     * Suppresion d'un artiste
+     * @param int $artiste_id
+     */
+    public function Delete($artiste_id){
+        $artiste = $this->GetOne('Artiste', array('id'=> $artiste_id) );
+        $a_data = array('etat' => false);
+        
+        //Si l'id correspond à un artiste, on modifie ses données avec les nouvelles données
+        if(is_object($artiste) ){
+            $this->DeleteArtisteClips($artiste);
+            $this->DeleteArtisteIle($artiste);
+            $a_data = $this->DeleteEntity($artiste);
+        }
+        
+        if($a_data['etat']){
+            $this->em->flush();
+        }
+        
+        return $a_data;
+    }
+    /*
+     * Suppresion des clips d'un artiste
+     * @param Artiste $Artiste
+     */
+    public function DeleteArtisteClips($Artiste){
+        $artiste_id = $Artiste->getId();
+        $artisteClips = $this->GetAll('ArtisteClip', array('artiste_id'=> $artiste_id ) );
+        
+        if(!empty($artisteClips) ){
+            foreach($artisteClips as $artisteClip){
+                $clip = $artisteClip->getClip();
+                //Si le clip n'a que cet artiste, on le supprime
+                if($this->CheckArtisteClips($clip, $artiste_id) ){
+                    // cf. fonction delete de lib_orm_clip
+                }
+                $this->DeleteEntity($artisteClip);
+            }
+        }
+    }
+    /*
+     * Suppresion des clips d'un artiste
+     * @param Clip $Clip
+     * @param int $artiste_id
+     */
+    public function CheckArtisteClips($Clip, $artiste_id){
+        $artisteClips = $this->GetAll('ArtisteClip', array('clip_id'=> $Clip->getId() ) );
+        $retour = true;
+        
+        if(!empty($artisteClips) ){
+            foreach($artisteClips as $artisteClip){
+                $artiste = $artisteClip->getArtiste();
+                $retour = ($artiste->getId() != $artiste_id)?false:$retour;
+            }
+        }
+        return $retour;
+    }
+    /*
+     * Suppresion du lien avec l'ile d'un artiste
+     * @param Artiste $Artiste
+     */
+    public function DeleteArtisteIle($Artiste){
+        $artisteIle = $this->GetOne('ArtisteIle', array('artiste_id'=> $Artiste->getId() ) );
+        
+        if(is_object($artisteIle) ){
+             $this->DeleteEntity($artisteIle);
+        }
+    }
 }
 ?>

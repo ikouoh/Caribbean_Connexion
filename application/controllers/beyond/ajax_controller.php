@@ -96,6 +96,17 @@ class Ajax_controller extends Back_Controller {
             echo json_encode($retour);
 	}
         
-        
+        /*
+         * 
+         */
+	public function DeleteEntity(){
+            
+            $id = $this->input->post('id');
+            $entity = $this->input->post('entity');
+            $lib = "lib_orm_".lcfirst($entity);
+            $retour = $this->$lib->Delete($id);
+            
+            echo json_encode($retour);
+	}
         
 }

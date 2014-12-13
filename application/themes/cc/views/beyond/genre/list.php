@@ -27,7 +27,10 @@
             <td><?php echo $genre['genre']; ?></td>
             <td><?php echo $genre['vue']; ?></td>
             <td><a href="" data-entity="Genre" data-id="<?php echo $genre['id']; ?>" class="switch-actif btn btn-<?php echo ($genre['actif'])?'success':'danger'; ?>">actif</a></td>
-            <td><a href="<?php echo $genre['edit_genre']; ?>" >éditer</a></td>
+            <td>
+                <a href="<?php echo $genre['edit_genre']; ?>" class="btn btn-info" >éditer</a>
+                <a href="" data-entity="Genre" data-id="<?php echo $genre['id']; ?>" class="delete-entity btn btn-info" >supprimer</a>
+            </td>
         </tr>
     <?php endforeach; ?>
         </tbody>

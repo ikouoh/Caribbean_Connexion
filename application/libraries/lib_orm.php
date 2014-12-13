@@ -118,6 +118,31 @@ class Lib_orm{
 
         return $this->UpdateTable($Entity, array("actif"=>$actif) );
     }
+    
+    /*
+     * 
+     */
+    public function DeleteEntity($Entity){
+        $etat = True;
+        $message = 'La suppression c\'est bien déroulée';
+        
+        try{
+            $this->em->remove($Entity);
+        }
+        catch (Exception $e) {
+            $etat = False;
+            $message = 'Un problème est survenu : '.$e;
+        }
+
+        $retour = array(
+            'etat'    => $etat,
+            'message' => $message,
+            'entity'  => $Entity
+        );
+
+        return $retour;
+        
+    }
 
 
 }

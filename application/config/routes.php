@@ -60,6 +60,7 @@ $route['recherche/(:any)'] = "recherche_controller/index/$1";
 $route['ajax/AddVueClip'] = "ajax_controller/AddVueClip";
 $route['ajax/LienMort'] = "ajax_controller/LienMort";
 $route['ajax/SwitchActive'] = "beyond/ajax_controller/SwitchActive";
+$route['ajax/DeleteEntity'] = "beyond/ajax_controller/DeleteEntity";
 
 $route['ajax/EditArtiste'] = "beyond/ajax_controller/EditArtiste";
 $route['ajax/NewArtiste'] = "beyond/ajax_controller/NewArtiste";
@@ -71,6 +72,7 @@ $route['ajax/EditIle'] = "beyond/ajax_controller/EditIle";
 $route['ajax/NewIle'] = "beyond/ajax_controller/NewIle";
 
 $route['ajax/EditClip'] = "beyond/ajax_controller/EditClip";
+$route['ajax/NewClip'] = "beyond/ajax_controller/NewClip";
 
 /*
 * routes back

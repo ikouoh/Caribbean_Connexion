@@ -148,6 +148,41 @@ class Lib_orm_ile extends Lib_orm{
         }
         return $a_data;
     }
+    
+    /*
+     * Suppresion d'une ile
+     * @param int $ile_id
+     */
+    public function Delete($ile_id){
+        $ile = $this->GetOne('Ile', array('id'=> $ile_id) );
+        $a_data = array('etat' => false);
+        
+        //Si l'id correspond à un artiste, on modifie ses données avec les nouvelles données
+        if(is_object($ile) ){
+            $this->DeleteIleArtistes($ile);
+            $a_data = $this->DeleteEntity($ile);
+        }
+        
+        if($a_data['etat']){
+            $this->em->flush();
+        }
+        
+        return $a_data;
+    }
+    /*
+     * Suppresion des artistes liées à une ile
+     * @param Ile $Ile
+     */
+    public function DeleteIleArtistes($Ile){
+        $ileArtistes = $this->GetAll('ArtisteIle', array('ile_id'=> $Ile->getId() ) );
+        
+        if(!empty($ileArtistes) ){
+            foreach($ileArtistes as $ileArtiste){
+                $artiste = $ileArtiste->getArtiste();
+                $this->DeleteEntity($artiste);
+            }
+        }
+    }
 
 }
 ?>

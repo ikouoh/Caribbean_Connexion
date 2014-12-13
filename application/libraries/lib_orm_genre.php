@@ -115,6 +115,43 @@ class Lib_orm_genre extends Lib_orm{
         return $a_data;
     }
     
+    /*
+     * Suppresion d'un genre
+     * @param int $genre_id
+     */
+    public function Delete($genre_id){
+        $genre = $this->GetOne('Genre', array('id'=> $genre_id) );
+        $a_data = array('etat' => false);
+        
+        //Si l'id correspond à un artiste, on modifie ses données avec les nouvelles données
+        if(is_object($genre) ){
+            $this->DeleteGenreClips($genre);
+            $a_data = $this->DeleteEntity($genre);
+        }
+        
+        if($a_data['etat']){
+            $this->em->flush();
+        }
+        
+        return $a_data;
+    }
+    /*
+     * Suppresion des clips liés à un genre
+     * @param Genre $Genre
+     */
+    public function DeleteGenreClips($Genre){
+        $Clips = $this->GetAll('Clip', array('genre_id'=> $Genre->getId() ) );
+        
+        if(!empty($Clips) ){
+            foreach($Clips as $Clip){
+                $a_champ = array(
+                    "genre_id" => 0,
+                    "actif" => false
+                );
+                $this->UpdateTable($Clip, $a_champ);
+            }
+        }
+    }
     
 }
 ?>

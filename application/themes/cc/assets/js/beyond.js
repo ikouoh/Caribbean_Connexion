@@ -16,9 +16,12 @@ $(document).ready(function () {
                     
                 }
         },'json');
-        
+        e.preventDefault();
     });
     
+    /*
+     * 
+     */
     $('#edit-artiste').submit(function(e){
         var id_form = $(this).attr('id');
         var id = $('#'+id_form+' #id_artiste').val();
@@ -178,6 +181,32 @@ $(document).ready(function () {
                     //location.reload();
                 }
         },'json');
+        e.preventDefault();
+    });
+    
+    /*
+     *  JS remove entity
+     */
+    $('.delete-entity').click(function(e){
+        var id = $(this).data('id');
+        var entity = $(this).data('entity');
+        
+        if(confirm("Confirmez la supprssion ?") ){
+            
+            
+            $.post(base_url + "ajax/DeleteEntity", {
+                id:id,
+                entity:entity
+                }, function (data) {
+                    if(data.etat === true){
+                        location.reload();
+
+                    } else{
+                        console.log(data.message);
+                    }
+            },'json');
+            
+        }        
         e.preventDefault();
     });
     
