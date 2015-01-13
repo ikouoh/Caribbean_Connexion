@@ -99,6 +99,38 @@ class Ajax_controller extends Back_Controller {
         /*
          * 
          */
+        public function EditClip(){
+            $data = array(
+                "id" => $this->input->post('id'),
+                "titre" => $this->input->post('titre'),
+                "genre" => $this->input->post('genre_id'),
+                "artistes" => $this->input->post('artistes'),
+                "annee" => $this->input->post('annee'),
+                "lien" => $this->input->post('lien')
+            );
+            
+            $retour = $this->lib_orm_clip->EditClip($data);
+            echo json_encode($retour);
+	}
+        /*
+         * 
+         */
+        public function NewClip(){
+            $data = array(
+                "titre" => $this->input->post('titre'),
+                "genre" => $this->input->post('genre_id'),
+                "artistes" => $this->input->post('artistes'),
+                "annee" => $this->input->post('annee'),
+                "lien" => $this->input->post('lien')
+            );
+            
+            $retour = $this->lib_orm_clip->NewClip($data);
+            echo json_encode($retour);
+	}
+        
+        /*
+         * 
+         */
 	public function DeleteEntity(){
             
             $id = $this->input->post('id');

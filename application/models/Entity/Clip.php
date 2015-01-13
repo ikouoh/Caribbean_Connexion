@@ -28,7 +28,7 @@ class Clip
 
     /**
      * @ManyToOne(targetEntity="Genre")
-     * @JoinColumn(name="genre_id", referencedColumnName="id", nullable=false)
+     * @JoinColumn(name="genre_id", referencedColumnName="id", nullable=true)
      */
     protected $genre_id;
 
@@ -95,7 +95,7 @@ class Clip
         return $this;
     }
 
-    public function setGenre(Object $genre = null){
+    public function setGenre(Genre $genre = null){
         $this->genre_id = $genre;
         return $this;
     }

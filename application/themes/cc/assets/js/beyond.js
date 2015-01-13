@@ -163,24 +163,64 @@ $(document).ready(function () {
      */
     $('#edit-clip').submit(function(e){
         var id_form = $(this).attr('id');
-        var id = $('#'+id_form+' #id_artiste').val();
-        var nom = $('#'+id_form+' #nom').val();
-        var ile = $('#'+id_form+' #ile').val();
-        var bio = $('#'+id_form+' #bio').val();
-        
+        var id = $('#'+id_form+' #id_clip').val();
+        var titre = $('#'+id_form+' #titre').val();
+        var genre = $('#'+id_form+' #genre').val();
+        var artistes = [];
+        var annee = $('#'+id_form+' #annee').val();
+        var lien = $('#'+id_form+' #lien').val();
+        //
+        $('#'+id_form+' #artistes :selected').each(function() {
+            artistes.push($( this ).val());
+        });
+        console.log(artistes);
         $.post(base_url + "ajax/EditClip", {
             id:id,
-            nom:nom,
-            ile_id:ile,
-            bio:bio
+            titre:titre,
+            genre_id:genre,
+            artistes:artistes,
+            annee:annee,
+            lien:lien
             }, function (data) { 
                 if(data.etat === true){
-                    location.replace(base_url+"beyond/artiste");
+                    location.replace(base_url+"beyond/clip");
                 } else{
                     console.log(data);
                     //location.reload();
                 }
         },'json');
+        e.preventDefault();
+    });
+    /*
+     * 
+     */
+    $('#new-clip').submit(function(e){
+        var id_form = $(this).attr('id');
+        var titre = $('#'+id_form+' #titre').val();
+        var genre = $('#'+id_form+' #genre').val();
+        var artistes = [];
+        var annee = $('#'+id_form+' #annee').val();
+        var lien = $('#'+id_form+' #lien').val();
+        //
+        $('#'+id_form+' #artistes :selected').each(function() {
+            artistes.push($( this ).val());
+        });
+        /**/
+        $.post(base_url + "ajax/NewClip", {
+            titre:titre,
+            genre_id:genre,
+            artistes:artistes,
+            annee:annee,
+            lien:lien
+            }, function (data) { 
+                if(data.etat === true){
+                    location.replace(base_url+"beyond/clip");
+                } else{
+                    console.log(data);
+                    //location.reload();
+                }
+        },'json');
+        /**/
         e.preventDefault();
     });
     
@@ -191,9 +231,7 @@ $(document).ready(function () {
         var id = $(this).data('id');
         var entity = $(this).data('entity');
         
-        if(confirm("Confirmez la supprssion ?") ){
-            
-            
+        if(confirm("Confirmez la supprssion ?") ){         
             $.post(base_url + "ajax/DeleteEntity", {
                 id:id,
                 entity:entity
@@ -205,9 +243,13 @@ $(document).ready(function () {
                         console.log(data.message);
                     }
             },'json');
-            
         }        
         e.preventDefault();
     });
+    
+    /*
+     * Voir clip
+     */
+    $("a[rel^='prettyPhoto']").prettyPhoto({});
     
 });

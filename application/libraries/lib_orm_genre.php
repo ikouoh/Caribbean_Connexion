@@ -53,6 +53,21 @@ class Lib_orm_genre extends Lib_orm{
         }
         return $a_data;
     }
+    
+    /*
+     * Récupération de la liste des iles pour créer un liste déroulante
+     */
+    public function GetSelectGenre(){
+        $genres = $this->GetAll('Genre', array(), array('genre'=>'ASC') );
+        $a_data = array(
+            0 => 'Aucun'
+        );
+
+        foreach($genres as $genre){
+            $a_data[$genre->getId()] = $genre->getGenre();
+        }
+        return $a_data;
+    }
 
     /*
      * A SUPPRIMER 

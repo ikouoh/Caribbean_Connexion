@@ -34,7 +34,7 @@ class Lib_orm_ile extends Lib_orm{
     }
     
     /*
-     * Récupération de la liste des ilese
+     * Récupération de la liste des iles
      * @param String $by
      * @param array $where
      */

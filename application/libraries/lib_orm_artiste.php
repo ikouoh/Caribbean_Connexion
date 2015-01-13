@@ -75,6 +75,21 @@ class Lib_orm_artiste extends Lib_orm{
         }
         return $a_data;
     }
+    
+    /*
+     * Récupération de la liste des artistes pour créer un liste déroulante
+     * @param String $by
+     * @param array $where
+     */
+    public function GetSelectArtiste(){
+        $artistes = $this->GetAll('Artiste', array(), array('nom'=>'ASC') );
+        $a_data = array();
+
+        foreach($artistes as $artiste){
+            $a_data[$artiste->getId()] = $artiste->getNom();
+        }
+        return $a_data;
+    }
 
     /*
      * Récupération de la liste des artistes d'un clip
@@ -92,7 +107,24 @@ class Lib_orm_artiste extends Lib_orm{
         }
 
         return implode(", ", $a_data);
+    }
+    
+    /*
+     * Récupération de la liste des ids des artistes d'un clip
+     * @param int $clip_id
+     */
+    public function GetArtistesClipId($clip_id){
+        $a_data = array();
+        $artistesClip = $this->GetAll('ArtisteClip', array('clip_id'=> $clip_id) );
 
+        if(!empty($artistesClip) ){
+            foreach($artistesClip as $artisteClip){
+                $a_data[] = $artisteClip->getArtiste()->getId();
+            }
+
+        }
+
+        return $a_data;
     }
     
     /*
@@ -213,6 +245,7 @@ class Lib_orm_artiste extends Lib_orm{
         
         return $a_data;
     }
+    
     /*
      * Suppresion des clips d'un artiste
      * @param Artiste $Artiste
@@ -226,14 +259,14 @@ class Lib_orm_artiste extends Lib_orm{
                 $clip = $artisteClip->getClip();
                 //Si le clip n'a que cet artiste, on le supprime
                 if($this->CheckArtisteClips($clip, $artiste_id) ){
-                    // cf. fonction delete de lib_orm_clip
+                    $this->lib_orm_clip->Delete($clip->getId() );
                 }
                 $this->DeleteEntity($artisteClip);
             }
         }
     }
     /*
-     * Suppresion des clips d'un artiste
+     * Vérification si artiste unique pour un clip
      * @param Clip $Clip
      * @param int $artiste_id
      */
