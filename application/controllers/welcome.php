@@ -10,7 +10,10 @@ class Welcome extends Front_Controller {
 		$listeGenre = $this->lib_orm_genre->GetListeGenre();
 
 		foreach($listeGenre as $genre){
-			$a_data['genres'][$genre['genre']] = $this->em->getRepository('Entity\Clip')->GetClip(null, null, $genre['id'], null, null, 'c.id DESC', 5, null);
+		    $clips = $this->em->getRepository('Entity\Clip')->GetClip(null, null, $genre['id'], null, null, 'c.id DESC', 5, null);
+                    if(!empty($clips) ){
+                        $a_data['genres'][$genre['genre']] = $clips;
+                    }
 		}
 
 		$this->template->title('Caribbean', 'Connexion');

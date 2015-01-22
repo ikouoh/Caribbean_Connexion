@@ -7,7 +7,7 @@ class My_Controller extends CI_Controller{
     protected $em;
 
     function __construct() {
-        //    die("Caribbean Connexion IS DOWN");
+        //die("Caribbean Connexion IS DOWN");
         parent::__construct();
 
         // Récupération de Doctrine
@@ -16,8 +16,8 @@ class My_Controller extends CI_Controller{
         //chargement de la config template
         $this->load->config('template');
 
-        $a_data = array();
-
+        $a_data = array();        
+        
     }
 
 
@@ -26,7 +26,7 @@ class My_Controller extends CI_Controller{
 class Front_Controller extends My_Controller {
 
     function __construct() {
-        //    die("Caribbean Connexion IS DOWN");
+        //die("Caribbean Connexion Front IS DOWN");
         parent::__construct();
 
         //set partials template
