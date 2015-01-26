@@ -2,8 +2,7 @@
 
 class Ile_controller extends Back_Controller {	
 
-	public function index()
-	{
+	public function index(){
 		$a_data = array(
                     "iles" => $this->lib_orm_ile->GetListeIle('id', array())
                 );		

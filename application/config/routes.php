@@ -74,6 +74,9 @@ $route['ajax/NewIle'] = "beyond/ajax_controller/NewIle";
 $route['ajax/EditClip'] = "beyond/ajax_controller/EditClip";
 $route['ajax/NewClip'] = "beyond/ajax_controller/NewClip";
 
+$route['ajax/Connexion'] = "beyond/ajax_controller/Connexion";
+$route['ajax/Deconnexion'] = "beyond/ajax_controller/Deconnexion";
+
 /*
 * routes back
 */

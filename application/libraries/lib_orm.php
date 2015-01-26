@@ -144,6 +144,12 @@ class Lib_orm{
         
     }
 
+    
+    public function Connexion($password){
+        $admin = $this->GetOne("Admin", array("password"=>$password));
+        
+        return is_object($admin);
+    }
 
 }
 ?>

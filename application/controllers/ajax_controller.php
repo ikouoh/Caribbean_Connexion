@@ -34,5 +34,5 @@ class Ajax_controller extends Front_Controller {
 		
 		echo json_encode($a_data);
 	}
-
+        
 }

@@ -1,6 +1,32 @@
 $(document).ready(function () {
     var base_url = $('#base_url').val();
     
+    
+    /*
+     *  Connexion admin
+     */
+    $("#beyond-connect").submit(function(e){
+        var id_form = $(this).attr('id');
+        var password = $('#'+id_form+' #password').val();
+        
+        $.post(base_url + "ajax/Connexion", {
+        password:password
+        }, function (data) {
+            location.reload();
+        },'json');
+        e.preventDefault();
+    });
+    /*
+     *  Déconnexion admin
+     */
+    $("#disconnect").click(function(e){        
+        $.post(base_url + "ajax/Deconnexion", {},
+        function (data) {
+            location.reload();
+        },'json');
+        e.preventDefault();
+    });
+    
     /*
      *  JS actif-inactif
      */

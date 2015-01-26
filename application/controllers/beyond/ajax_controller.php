@@ -141,4 +141,27 @@ class Ajax_controller extends Back_Controller {
             echo json_encode($retour);
 	}
         
+        /*
+         * 
+         */
+        public function Connexion(){
+            $password = $this->input->post('password');
+            $a_data = array(
+                "is_admin" => $_SESSION["admin"] = $this->lib_orm->Connexion(md5($password))
+            );
+            
+            echo json_encode($a_data);
+        }
+        
+        /*
+         * 
+         */
+        public function Deconnexion(){
+            $a_data = array(
+                "is_admin" => $_SESSION["admin"] = false
+            );
+            
+            echo json_encode($a_data);
+        }
+        
 }
