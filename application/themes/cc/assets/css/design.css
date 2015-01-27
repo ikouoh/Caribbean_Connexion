@@ -85,6 +85,12 @@ header
 	width: 50px;
 	height: 50px;
 }
+
+#corps .container
+{
+	width: 100%;
+	height: 100%;
+}
 /****************************
 	pied de page du site
 ****************************/
@@ -103,10 +109,12 @@ a
 {
 	text-decoration: none;
 	color: olive;
+        font-size: 1.4em;
 }
 a:hover
 {
-	text-shadow: 2px 2px 2px #555;
+    color: olive;
+    text-shadow: 2px 2px 2px #555;
 } 
 /******************************
 	autres détails du site
@@ -128,8 +136,10 @@ a:hover
 	padding-right: 10%;
 }
 fieldset{
-	border-color: red;
-	border-radius: 10px;
+	padding: 10px;
+        border-radius: 10px;
+        border-top: 2px solid red;
+        border-bottom: 2px solid red;
 }
 .sousligne
 {
@@ -203,4 +213,36 @@ fieldset{
 	height: 30px; 
 	background: url(../img/prettyPhoto/default/sprite.png) 2px 1px no-repeat; 
 	cursor: pointer;
+}
+
+#beyond{
+	color: black;
+}
+#beyond:hover{
+	text-decoration: none;
+	cursor:default ;
+	text-shadow: none;
+}
+
+/*
+*   bootstrap
+*/
+.table th {
+   text-align: center;   
+}
+select[multiple]{
+	width: 15%;
+}
+select[multiple] option{
+	padding: 3px;
+}
+
+fieldset legend{
+	width: auto;
+	margin-bottom: 3px;
+	border: none;
+	color: inherit;
+}
+h3{
+        margin-bottom: 30px;
 }

@@ -4,9 +4,9 @@ namespace Entity;
 
 /**
  * @Entity
- * @Table(name="artiste")
+ * @Table(name="admin")
  */
-class Artiste
+class Admin
 {
 
     /**
@@ -20,22 +20,12 @@ class Artiste
      * @Column(type="string", length=32, unique=true, nullable=false)
      */
     protected $nom;
-
+    
     /**
-     * @Column(type="text", nullable=true)
+     * @Column(type="string", length=32, nullable=false)
      */
-    protected $bio;
-
-    /**
-     * @Column(type="string", length=32, nullable=true)
-     */
-    protected $image;
-
-    /**
-     * @Column(type="decimal", precision=4, scale=0)
-     */
-    protected $vues;
-
+    protected $password;
+    
     /**
      * @Column(type="boolean")
      */
@@ -45,27 +35,19 @@ class Artiste
     /*
     * getters
     */
-    
+
     public function getId(){
         return $this->id;
     }
 
+    public function getPassword(){
+        return $this->password;
+    }
+    
     public function getNom(){
         return $this->nom;
     }
-
-    public function getBio(){
-        return $this->bio;
-    }
-
-    public function getImage(){
-        return $this->image;
-    }
-
-    public function getVues(){
-        return $this->vues;
-    }
-
+    
     public function getActif(){
         return $this->actif;
     }
@@ -79,19 +61,9 @@ class Artiste
         $this->nom = $nom;
         return $this;
     }
-
-    public function setBio($bio){
-        $this->bio = $bio;
-        return $this;
-    }
-
-    public function setImage($image){
-        $this->image = $image;
-        return $this;
-    }
-
-    public function setVues($vues){
-        $this->vues = $vues;
+    
+    public function setPassword($password){
+        $this->password = $password;
         return $this;
     }
     

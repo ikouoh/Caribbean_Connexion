@@ -1,18 +1,21 @@
 <?php
 /*
-librairie d'accès à la BDD via l'orm 'doctriine'
-*/
+ * librairie de gestion des 'iles'
+ * @author i.kouoh
+ * dernière édition 02/12/2014
+ */
 
 class Lib_orm_ile extends Lib_orm{
 
-	public function __construct() {
+    public function __construct() {
 
         parent::__construct();
     }
 
     /*
-    * fonction de réupération des infos d'un artiste à partir de son id
-    */
+     * fonction de réupération des infos d'un artiste à partir de son id
+     * @param int $ile_id
+     */
     public function GetIle($ile_id){
         $ile = $this->GetOne('Ile', array('id' => $ile_id) );
         $a_data = null;
@@ -22,26 +25,57 @@ class Lib_orm_ile extends Lib_orm{
             $a_data = array(
                 "id" => $ile_id,
                 "ile" => $ile->getIle(),
-                "descriptif" => $ile->getDescriptif()
+                "descriptif" => $ile->getDescriptif(),
+                "vue" => $ile->getVues(),
+                "image" => $ile->getImage()
             );
         }
         return $a_data;
     }
     
-    public function GetListeIle(){
-        $iles = $this->GetAll('Ile', array('actif'=>true), array('ile'=>'ASC') );
+    /*
+     * Récupération de la liste des iles
+     * @param String $by
+     * @param array $where
+     */
+    public function GetListeIle($by='ile', $where=array('actif'=>true)){
+        $iles = $this->GetAll('Ile', $where, array($by=>'ASC') );
         $a_data = array();
 
         foreach($iles as $ile){
             $a_data[] = array(
                 "id"  => $ile->getId(),
                 "ile" => $ile->getIle(),
-                "voir_ile" => base_url().'ile/'.$ile->getId()
+                "actif" => $ile->getActif(),
+                "vue" => $ile->getVues(),
+                "descriptif" => $ile->getDescriptif(),
+                "image" => $ile->getImage(),
+                "voir_ile" => base_url().'ile/'.$ile->getId(),
+                "edit_ile" => base_url().'beyond/ile/edit/'.$ile->getId()
             );
         }
         return $a_data;
     }
+    
+    /*
+     * Récupération de la liste des iles pour créer un liste déroulante
+     */
+    public function GetSelectIle(){
+        $iles = $this->GetAll('Ile', array(), array('ile'=>'ASC') );
+        $a_data = array(
+            0 => 'Aucune'
+        );
 
+        foreach($iles as $ile){
+            $a_data[$ile->getId()] = $ile->getIle();
+        }
+        return $a_data;
+    }
+
+    /*
+     * Récupération de la liste des artistes d'une ile
+     * @param int $ile_id
+     */
     public function GetArtistesIle($ile_id){
         $artistesIle = $this->GetAll('ArtisteIle', array('ile_id' => $ile_id) );
         $a_data = null;
@@ -61,27 +95,93 @@ class Lib_orm_ile extends Lib_orm{
         return $a_data;
     }
 
+    /*
+     * Récupération des clips d'une ile
+     * @param int ile_id
+     */
     public function GetClipsIle($ile_id){
-        /*
-        $artistesIle = $this->GetAll('ArtisteIle', array('ile_id' => $ile_id) );
-        $a_artistes = $a_clips = array();
-
-        //Si l'ile comporte des artistes, on récupère ceux-ci
-        if(!empty($artistesIle) ){
-            foreach($artistesIle as $artisteIle){
-                $artiste = $artisteIle->getArtiste();
-                $a_artistes[] = $artiste->getId();
+        return $this->ci->doctrine->em->getRepository('Entity\Clip')->GetClip(null, null, null, $ile_id, null, 'c.annee');
+    }
+    
+    /*
+     * Edition d'une ile
+     * @param array $data
+     */
+    public function EditIle($data){
+        $ile = $this->GetOne('Ile', array('id'=> $data['id']) );
+        $a_data = array();
+        //Si l'id correspond à une ile, on modifie ses données avec les nouvelles données
+        if(is_object($ile) ){
+            $a_champ = array(
+                "ile" => $data['ile'],
+                "descriptif" => $data['descriptif'],
+                "image" => (isset($data['image']))?$data['image']:'ile/'.strtolower(str_replace(' ', '', $data['ile'])).'.jpg',
+                "actif" => true
+            );
+            $a_data = $this->UpdateTable($ile, $a_champ);
+        }
+        return $a_data;
+    }
+    
+    /*
+     * Ajout d'une nouvelle ile
+     * @param array $data
+     */
+    public function NewIle($data){
+        $ile = $this->GetOne('Ile', array('ile'=> $data['ile']) );
+        $a_data = array('etat' => false);
+        
+        //Si le genre n'existe pas déjà dans la BDD, on peut l'ajouter
+        if(!is_object($ile) ){
+            $ile = $this->NewEntity("Ile");
+            $ile->setVues(0);
+            $ile->setActif(true);
+            $this->em->persist($ile);
+            
+            $a_champ = array(
+                "ile" => $data['ile'],
+                "descriptif" => $data['descriptif'],
+                "image" => (isset($data['image']))?$data['image']:'ile/'.strtolower(str_replace(' ', '', $data['ile'])).'.jpg'
+            );
+            
+            $a_data = $this->UpdateTable($ile, $a_champ);
+        }
+        return $a_data;
+    }
+    
+    /*
+     * Suppresion d'une ile
+     * @param int $ile_id
+     */
+    public function Delete($ile_id){
+        $ile = $this->GetOne('Ile', array('id'=> $ile_id) );
+        $a_data = array('etat' => false);
+        
+        //Si l'id correspond à un artiste, on modifie ses données avec les nouvelles données
+        if(is_object($ile) ){
+            $this->DeleteIleArtistes($ile);
+            $a_data = $this->DeleteEntity($ile);
+        }
+        
+        if($a_data['etat']){
+            $this->em->flush();
+        }
+        
+        return $a_data;
+    }
+    /*
+     * Suppresion des artistes liées à une ile
+     * @param Ile $Ile
+     */
+    public function DeleteIleArtistes($Ile){
+        $ileArtistes = $this->GetAll('ArtisteIle', array('ile_id'=> $Ile->getId() ) );
+        
+        if(!empty($ileArtistes) ){
+            foreach($ileArtistes as $ileArtiste){
+                $artiste = $ileArtiste->getArtiste();
+                $this->DeleteEntity($artiste);
             }
         }
-
-        //Si on a recupéré des artistes correspondant à l'ile, on récupère leurs clips associés
-        if(!empty($a_artistes) ){
-            $this->ci->load->library('lib_orm_clip');
-            $a_clips = $this->ci->lib_orm_clip->GetClipByArtiste($a_artistes); 
-        }
-        return $a_clips;
-*/
-        return $this->ci->doctrine->em->getRepository('Entity\Clip')->GetClip(null, null, null, $ile_id, null, 'c.annee');
     }
 
 }

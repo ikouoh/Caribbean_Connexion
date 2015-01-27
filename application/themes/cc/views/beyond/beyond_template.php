@@ -3,12 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <title><?php echo $template['title']; ?></title>
+  <?php echo theme_css('bootstrap', true); ?>
   <?php echo theme_css('design', true); ?>
   <?php echo theme_css('prettyPhoto', true); ?>
   <?php echo theme_js('jquery', true); ?>
   <?php echo theme_js('jqueryui', true); ?>
   <?php echo theme_js('jquery.prettyPhoto', true); ?>
-  <?php echo theme_js('global', true); ?>
+  <?php echo theme_js('bootstrap', true); ?>
+  <?php echo theme_js('beyond', true); ?>
   <link rel="shortcut icon" href="<?php echo img_url('icone.ico'); ?>" type="image/x-icon" /> 
 </head>
 
@@ -19,7 +21,7 @@
     <header></header>
     <?php echo $template['partials']['menu']; ?>
 	
-    <div id="corps" role="main">
+    <div id="corps" class="container" role="main">
         <?php
           echo $template['partials']['content'];
         ?>

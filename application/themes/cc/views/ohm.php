@@ -4,6 +4,7 @@
 	</h3>
 </p>
 
+<?php if($plus_vues): ?>
 <fieldset>
 	<legend>5 clips 'les plus vues' :</legend>
 	<div id="video_container">
@@ -18,7 +19,11 @@
 	<?php endforeach; ?>
 	</div>
 </fieldset>
+<?php endif; ?>
+
 <br/>
+
+<?php if(isset($genres)): ?>
 <?php foreach($genres as $genre => $clips): ?>
 <fieldset>
 	<legend>5 derniers clips '<?php echo $genre; ?>':</legend>
@@ -36,3 +41,4 @@
 </fieldset>
 <br/>
 <?php endforeach; ?>
+<?php endif; ?>

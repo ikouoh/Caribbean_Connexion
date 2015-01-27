@@ -67,8 +67,8 @@ class ClipRepository extends EntityRepository{
 	    }
 
 	    $where .= (!is_null($titre) )? " c.titre LIKE '%$titre%' ": ""; 									//vérifie le titre
-    	$where .= (!is_null($genre) )? ((!empty($where) )? " AND ": "")." c.genre_id = $genre ": "";		//vérifie le genre
-    	$where .= (!is_null($annee) )? ((!empty($where) )? " AND ": "")." c.annee LIKE '%$annee%' ": "";	//vérifie l'année
+            $where .= (!is_null($genre) )? ((!empty($where) )? " AND ": "")." c.genre_id = $genre ": "";		//vérifie le genre
+            $where .= (!is_null($annee) )? ((!empty($where) )? " AND ": "")." c.annee LIKE '%$annee%' ": "";	//vérifie l'année
 	    $where .= (!empty($where) )? "AND c.actif = 1": "c.actif = 1";
 
 		try{

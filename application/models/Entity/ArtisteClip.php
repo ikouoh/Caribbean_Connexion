@@ -50,12 +50,12 @@ class ArtisteClip
     * setters
     */
 
-    public function setArtiste(Object $artiste = null){
+    public function setArtiste(Artiste $artiste = null){
         $this->artiste_id = $artiste;
         return $this;
     }
 
-    public function setClip(Object $clip = null){
+    public function setClip(Clip $clip = null){
         $this->clip_id = $clip;
         return $this;
     }
