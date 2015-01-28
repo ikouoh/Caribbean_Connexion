@@ -41,6 +41,15 @@ $(document).ready(function () {
             },'json');
         }
     });
+    
+    $('.header__icon').click(function(e){
+        e.preventDefault();
+        $('body').toggleClass('side-menu');
+    });
 
+    /* Je veux pouvoir masquer le menu si on clique sur le cache */
+    $('#site-cache').click(function(e){
+        $('body').removeClass('side-menu');
+    })
     
 });

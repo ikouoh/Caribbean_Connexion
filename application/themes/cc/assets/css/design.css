@@ -1,6 +1,7 @@
 body
 {
 	width: 100%;
+        height:auto;
 	margin: auto;
 	margin-bottom: 20px;
 	background: fixed url('../img/CCbackground.jpg') center center no-repeat;
@@ -20,9 +21,11 @@ header
 	background: url('../img/banniere2.jpg') center center no-repeat;
 	background-size: 100% 100%;
 	opacity: 0.9;
-
 	border-radius: 0px 0px 10px 10px;
 	
+}
+.header-mobile{
+    display: none;
 }
 /**********************
 	menu du site
@@ -172,6 +175,17 @@ table{
 	color: red;
 }
 
+.table-search{
+    width: 80%;
+}
+.table-search td{
+    width: 40%;
+    padding-bottom: 5px;
+}
+.table-search select, .table-search input{
+    width: 100%;
+}
+
 .hide{
 	display: none;
 }
@@ -192,7 +206,6 @@ table{
 
 .video:hover{
 	background: rgb(45,25,10);
-	/*background: rgb(70,30,10);*/
 }
 .video_ohm:hover{
 	background: rgb(70,30,10);
@@ -245,4 +258,92 @@ fieldset legend{
 }
 h3{
         margin-bottom: 30px;
+}
+
+/*
+*   responsive
+*/
+@media only screen and (max-width: 850px) {
+    #container{
+        position: absolute;
+        transition-duration: 0.3s;
+        transform: translateX(0px); 
+        width: 100%;
+    }
+    #corps #container{
+        height: 100%;
+    }
+    #corps{
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .side-menu {
+        overflow: hidden;
+        background-size: contain;
+    }
+    .side-menu #container {
+        transform: translateX(150px); 
+    } 
+    .side-menu #site-cache {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(20, 20, 20, 0.7); 
+    }
+    
+    header{ display: none; }
+    .header-mobile{
+        position: static;
+        display: block;
+        height: 36px;
+        color: olive;
+        background: rgb(70,30,10);
+        width: 100%;
+    }
+    .header__icon {
+        position: inherit;
+        display: block;
+        float: left;
+        width: 36px;
+        height: 36px;
+        cursor: pointer; 
+    }
+    .header__icon:after {
+      content: '';
+      position: absolute;
+      display: block;
+      width: 1rem;
+      height: 0;
+      left: 10px;
+      box-shadow: 0 9px 0 2px green, 0 18px 0 2px yellow, 0 27px 0 2px red; 
+    }
+    .header__text{
+        vertical-align: -12px;
+        font-size: 1.2em
+    }
+    
+    #menu {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        opacity: 1;
+        -webkit-overflow-scrolling: touch;
+        background-color: rgb(70,30,10);
+        width: 150px;
+        height: 100%;
+        transform: translateX(-150px); 
+    }
+    /* Un lien par ligne */
+    #menu div {
+        display: block;
+        height: 40px;
+        width: 150px;
+        text-align: center;
+        line-height: 40px;
+        border-bottom: 1px solid red; 
+    }    
+    
 }

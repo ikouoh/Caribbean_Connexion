@@ -19,6 +19,7 @@
   <input type="hidden" name="clipid" id="clipid" value="" />
   <div id="container">
     <header></header>
+    <div class="header-mobile"><span class="header__icon"></span><span class="header__text">Caribbean Connexion</span></div>
     <?php echo $template['partials']['menu']; ?>
 	
     <div id="corps" role="main">
@@ -28,7 +29,8 @@
           echo $template['partials']['fb'];
         ?>
     </div>
-		<?php echo $template['partials']['footer']; ?>
+    <div id="site-cache"></div>
+    <?php echo $template['partials']['footer']; ?>
   </div> 
   <!-- end of #container -->
 </body>
