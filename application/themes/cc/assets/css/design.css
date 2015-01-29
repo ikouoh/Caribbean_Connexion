@@ -202,23 +202,30 @@ table{
 	border-radius: 10px;
 	display: inline-block;
 	margin: 5px;
-}
-
-.video:hover{
-	background: rgb(45,25,10);
-}
-.video_ohm:hover{
-	background: rgb(70,30,10);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
 }
 
 fieldset{
 	background: rgb(45,25,10);
 }
 
-.info_clip{
+.video a, .video_ohm a{
 	display: block;
+	width: 100%;
+	height: 75px;
+	margin-top:5px;
+        overflow:hidden;
+}
+.info_clip{
 	width: inherit;
-	
+	height: 25px;
+	background: rgba(45,25,10,0.8);
+	padding:3px;
+	border-radius: 5px;
+}
+.year_clip{
+    display: none;
 }
 
 .pp_deadLink a{

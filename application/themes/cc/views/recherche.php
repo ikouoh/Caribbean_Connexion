@@ -63,14 +63,8 @@
 	<br/>
 	<br/>
 	<div id="video_container">
-	<?php foreach($clips as $clip): ?>
-		<div class="video">
-			<a href="http://www.youtube.com/watch?v=<?php echo $clip['lien']; ?>&rel=0" rel="prettyPhoto" data-clipid="<?php echo $clip['id']; ?>">
-				<span class="info_clip">
-					<?php echo $clip['titre']; ?> <br/> <?php echo $clip['artistes']; ?> <br/> <?php echo $clip['genre']; ?> <br/> <?php echo $clip['annee']; ?>
-				</span> 
-			</a>
-		</div>
-	<?php endforeach; ?>
+	<?php foreach($clips as $clip):
+            clips($clip['lien'], $clip['id'], $clip['titre'], $clip['annee'], false);
+        endforeach; ?>
 	</div>
 <?php endif; ?>

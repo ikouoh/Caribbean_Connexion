@@ -64,7 +64,7 @@ $autoload['libraries'] = array('doctrine', 'template', 'lib_orm', 'lib_orm_artis
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url', 'assets_helper', 'form');
+$autoload['helper'] = array('url', 'assets_helper', 'form', 'clips_helper');
 
 
 /*
