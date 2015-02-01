@@ -193,8 +193,11 @@ table{
 #pp_full_res iframe{
 	width: 100%;
 }
+fieldset{
+	background: rgb(45,25,10);
+}
 
-.video, .video_ohm{
+.video, .video_ohm, .artiste, .genre, .ile{
 	width: 30%;
 	border: 1px;
 	border-color: red;
@@ -204,25 +207,34 @@ table{
 	margin: 5px;
         background-size: 100% 100%;
         background-repeat: no-repeat;
-}
-
-fieldset{
-	background: rgb(45,25,10);
-}
-
-.video a, .video_ohm a{
-	display: block;
-	width: 100%;
-	height: 75px;
-	margin-top:5px;
         overflow:hidden;
 }
+.artiste, .genre, .ile{
+    width: 20%;
+}
+
+.video a, .video_ohm a, .artiste a, .genre a, .ile a{
+    display: block;
+    width: 100%;
+    height: 75px;
+    margin-top:5px;
+    overflow:hidden;
+}
+.artiste a, .genre a, .ile a{
+    height: 55px;
+}
 .info_clip{
-	width: inherit;
-	height: 25px;
-	background: rgba(45,25,10,0.8);
-	padding:3px;
-	border-radius: 5px;
+    width: inherit;
+    height: 25px;
+    background: rgba(45,25,10,0.8);
+    padding:3px;
+    border-radius: 5px;
+}
+.info_liste{
+    width: inherit;
+    background: rgba(45,25,10,0.9);
+    padding:3px;
+    border-radius: 5px;
 }
 .year_clip{
     display: none;

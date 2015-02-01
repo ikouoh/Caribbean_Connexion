@@ -67,6 +67,7 @@ class Lib_orm_artiste extends Lib_orm{
             $a_data[] = array(
                 "id"  => $artiste->getId(),
                 "nom" => $artiste->getNom(),
+                "image" => $artiste->getImage(),
                 "actif" => $artiste->getActif(),
                 "vue" => $artiste->getVues(),
                 "voir_artiste" => base_url().'artiste/'.$artiste->getId(),

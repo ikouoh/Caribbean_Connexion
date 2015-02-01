@@ -3,21 +3,19 @@
 		<h1>Iles</h1> <br>	
 	</p>
 
-	<table align="center">
-		<?php  foreach($iles as $ile): ?>
-			<tr>
-				<td><a href=<?php echo $ile['voir_ile']; ?>><?php echo $ile['ile']; ?></a></td>
-			</tr>
-		<?php endforeach; ?>
-	</table>
+        <div class="liste_container">
+            <?php  foreach($iles as $ile):
+                iles($ile['ile'], $ile['image'], $ile['voir_ile']);  
+            endforeach; ?>
+	</div>
 
 <?php else: ?>
 
 	<span id="bio">
-		<h1><?php echo $ile['ile']; ?></h1>
-			<p>
-				 <?php echo $ile['descriptif']; ?>
-			</p>
+            <h1><?php echo img($ile['image'], '', 'ile2.jpg'); ?> - <?php echo $ile['ile']; ?></h1>
+                <p>
+                    <?php echo $ile['descriptif']; ?>
+                </p>
 	</span>
 	<h2>Clips</h2>
 		<div id="video_container">
@@ -26,14 +24,11 @@
                 endforeach ?>
 		</div>
 
-	<span id="bio">
-		<h2>Artistes</h2>
-
-		<p>
-			<?php foreach($artistes as $artiste): ?>
-				> <a href=<?php echo $artiste['voir_artiste']; ?> ><?php echo $artiste['nom']; ?></a> <
-			<?php endforeach ?>
-		</p>
-	</span>
+        <h2>Artistes</h2>
+            <div class="liste_container">
+                <?php  foreach($artistes as $artiste):
+                    artistes($artiste['nom'], $artiste['image'], $artiste['voir_artiste']);
+                endforeach; ?>
+            </div>
 
 <?php endif; ?>

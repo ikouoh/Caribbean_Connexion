@@ -45,6 +45,7 @@ class Lib_orm_genre extends Lib_orm{
             $a_data[] = array(
                 "id"  => $genre->getId(),
                 "genre" => $genre->getGenre(),
+                "image" => $genre->getImage(),
                 "actif" => $genre->getActif(),
                 "vue" => $genre->getVues(),
                 "voir_genre" => base_url().'genre/'.$genre->getId(),

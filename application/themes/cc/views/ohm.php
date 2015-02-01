@@ -7,7 +7,7 @@
 <?php if($plus_vues): ?>
 <fieldset>
 	<legend>5 clips 'les plus vues' :</legend>
-	<div id="video_container">
+	<div class="video_container">
 	<?php foreach($plus_vues as $clip):
             clips($clip['lien'], $clip['id'], $clip['titre'], $clip['annee'], true);
         endforeach; ?>
@@ -21,7 +21,7 @@
 <?php foreach($genres as $genre => $clips): ?>
 <fieldset>
 	<legend>5 derniers clips '<?php echo $genre; ?>':</legend>
-	<div id="video_container">
+	<div class="video_container">
 	<?php foreach($clips as $clip):
             clips($clip['lien'], $clip['id'], $clip['titre'], $clip['annee'], false);
         endforeach; ?>

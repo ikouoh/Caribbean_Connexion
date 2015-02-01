@@ -46,6 +46,7 @@ class Lib_orm_ile extends Lib_orm{
             $a_data[] = array(
                 "id"  => $ile->getId(),
                 "ile" => $ile->getIle(),
+                "image" => $ile->getImage(),
                 "actif" => $ile->getActif(),
                 "vue" => $ile->getVues(),
                 "descriptif" => $ile->getDescriptif(),
@@ -78,20 +79,21 @@ class Lib_orm_ile extends Lib_orm{
      */
     public function GetArtistesIle($ile_id){
         $artistesIle = $this->GetAll('ArtisteIle', array('ile_id' => $ile_id) );
-        $a_data = null;
+        $a_data = array();
 
         //Si l'ile comporte des artistes, on récupère ceux-ci
         if(!empty($artistesIle) ){
-            $a_data = array();
             foreach($artistesIle as $artisteIle){
                 $artiste = $artisteIle->getArtiste();
-                $a_data[] = array(
+                $a_data[$artiste->getNom()] = array(
                     "id" => $artiste->getId(),
                     "nom" => $artiste->getNom(),
+                    "image" => $artiste->getImage(),
                     "voir_artiste" => base_url().'artiste/'.$artiste->getId()
                 );
             }
         }
+        ksort($a_data);
         return $a_data;
     }
 

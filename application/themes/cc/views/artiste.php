@@ -3,18 +3,16 @@
 		<h1>Artistes</h1> <br/>	
 	</p>
 
-	<table align="center">
-		<?php  foreach($artistes as $artiste): ?>
-			<tr>
-				<td><a href="<?php echo $artiste['voir_artiste']; ?>" ><?php echo $artiste['nom']; ?></a></td>
-			</tr>
-		<?php endforeach; ?>
-	</table>
+        <div class="liste_container">
+            <?php  foreach($artistes as $artiste):
+                artistes($artiste['nom'], $artiste['image'], $artiste['voir_artiste']);
+            endforeach; ?>
+	</div>
 
 <?php else: ?>
 
 	<span id="bio">
-		<h1><?php echo img($artiste['image'], $artiste['nom']); ?> - <?php echo $artiste['nom']; ?></h1>
+		<h1><?php echo img($artiste['image'], '', 'mic1.jpg'); ?> - <?php echo $artiste['nom']; ?></h1>
 			<h3><a href=<?php echo $artiste['voir_ile']; ?> ><?php echo $artiste['ile']; ?></a></h3>
 			<p>
 				 <?php echo $artiste['bio']; ?>

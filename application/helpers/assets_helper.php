@@ -109,8 +109,9 @@ if (!function_exists('img_url')) {
 
 if (!function_exists('img')) {
 
-    function img($nom, $alt = '') {
-        return '<img src="' . img_url($nom) . '" alt="' . $alt . '" />';
+    function img($nom, $alt = '', $default='CaribbeanConnexion.jpg' ) {
+        
+        return '<img src="' . img_url($nom) . '" alt="' . $alt . '" onError=\'this.src="'. img_url($default) .'"\' />';
     }
 
 }

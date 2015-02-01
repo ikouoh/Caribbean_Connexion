@@ -3,18 +3,16 @@
 		<h1>Genres</h1> <br/>	
 	</p>
 
-	<table align="center">
-		<?php  foreach($genres as $genre): ?>
-			<tr>
-				<td><a href="<?php echo $genre['voir_genre']; ?>" ><?php echo $genre['genre']; ?></a></td>
-			</tr>
-		<?php endforeach; ?>
-	</table>
+        <div class="liste_container">
+            <?php  foreach($genres as $genre):
+                genres($genre['genre'], $genre['image'], $genre['voir_genre']);
+            endforeach; ?>
+	</div>
 
 <?php else: ?>
 
 	<span id="bio">
-		<h1><img src=> - <?php echo $genre['genre']; ?></h1>
+		<h1><?php echo img($genre['image'], '', 'music1.jpg'); ?> - <?php echo $genre['genre']; ?></h1>
 			<p>
 				 <?php echo $genre['descriptif']; ?>
 			</p>
