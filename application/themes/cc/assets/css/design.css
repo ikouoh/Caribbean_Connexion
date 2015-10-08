@@ -15,14 +15,16 @@ body
 *************************/
 header
 {
-	margin: auto;
+    display: none;
+    /* A Supprimer
+        margin: auto;
 	width: 900px;
 	height: 150px;
 	background: url('../img/banniere2.jpg') center center no-repeat;
 	background-size: 100% 100%;
 	opacity: 0.9;
 	border-radius: 0px 0px 10px 10px;
-	
+    */
 }
 .header-mobile{
     display: none;
@@ -34,15 +36,16 @@ header
 {
 	opacity: 0.9;
 	margin: auto;
-	width: 800px;
-	height: 25px;
+        padding-left: 8%;
+	width: 100%;
+	height: 36px;
 	text-align: center;
 	background: rgb(70,30,10);
 	font-style: oblique;
 	color: olive;
 	border: 1px outset red;
 	border-top: none;
-	border-radius: 0px 0px 10px 10px;
+	//border-radius: 0px 0px 10px 10px;
 }
 #menu a:link
 {
@@ -54,8 +57,9 @@ header
 }
 #menu div
 {
-	width: 20%;
+	width: 18%;
 	float: left;
+        padding: 5px;;
 	text-align: center;
 }
 
@@ -216,7 +220,7 @@ fieldset{
 .video a, .video_ohm a, .artiste a, .genre a, .ile a{
     display: block;
     width: 100%;
-    height: 75px;
+    height: 95px;
     margin-top:5px;
     overflow:hidden;
 }
@@ -363,6 +367,14 @@ h3{
         text-align: center;
         line-height: 40px;
         border-bottom: 1px solid red; 
-    }    
+    }   
+    
+    .video a, .video_ohm a{
+        display: block;
+        width: 100%;
+        height: 75px;
+        margin-top:5px;
+        overflow:hidden;
+    }
     
 }

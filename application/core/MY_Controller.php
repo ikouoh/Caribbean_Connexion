@@ -50,11 +50,9 @@ class Front_Controller extends My_Controller {
 class Back_Controller extends My_Controller{
     function __construct(){
         parent::__construct();
-
+        
         $this->template->set_partial('menu','beyond/menu');
         $this->template->set_partial('footer','footer');
-        if($_SERVER["REQUEST_URI"] != "/Caribbean_Connexion/beyond"){$this->is_admin();}
-        //die($_SERVER["REQUEST_URI"]);
     }
     
     function is_admin(){

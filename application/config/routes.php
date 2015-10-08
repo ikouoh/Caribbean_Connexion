@@ -39,6 +39,7 @@
 */
 
 $route['default_controller'] = "welcome";
+//$route['default_controller/test'] = "welcome/test";
 $route['404_override'] = '';
 
 $route['artiste'] = "artiste_controller/index";

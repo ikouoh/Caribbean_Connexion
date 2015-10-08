@@ -21,6 +21,12 @@ class Welcome extends Front_Controller {
 		$this->template->build('main_template');
 		
 	}
+        
+        public function test(){
+            $this->template->title('test');
+            $this->template->set_partial('content','test');
+            $this->template->build('main_template');
+        }
 
 	
 }

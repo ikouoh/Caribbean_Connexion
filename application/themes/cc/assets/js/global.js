@@ -50,15 +50,6 @@ $(document).ready(function () {
     /* Je veux pouvoir masquer le menu si on clique sur le cache */
     $('#site-cache').click(function(e){
         $('body').removeClass('side-menu');
-    })
+    });
     
-    /**
-    $('.video').mouseenter(function(e){
-        e.target.children[0].style.visibility='visible';
-    });
-    $('.video a').mouseleave(function(e){
-        //console.log(e.target);
-        e.target.style.visibility='hidden';
-    });
-    /**/
 });

@@ -85,24 +85,24 @@ class ClipRepository extends EntityRepository{
 	}
 
 	public function GetAnnee(){
-		$this->ci =& get_instance();
+            $this->ci =& get_instance();
 	    $this->ci->load->library('doctrine');
 	    $annees = array();
 
 	    try{
-			$a_annee =  $this->ci
-				   ->doctrine
-				   ->em
-				   ->createQuery("SELECT DISTINCT(c.annee) FROM Entity\Clip c ORDER BY c.annee")->getResult();
-			
-			foreach($a_annee as $annee){
-				$annees[] = $annee['annee']->format('Y');
-			}
-			return $annees;
+                $a_annee =  $this->ci
+                           ->doctrine
+                           ->em
+                           ->createQuery("SELECT DISTINCT(c.annee) FROM Entity\Clip c ORDER BY c.annee")->getResult();
 
-		}catch(\Doctrine\ORM\NoResultException $e){
-		  return null;
-		}
+                foreach($a_annee as $annee){
+                        $annees[] = $annee['annee']->format('Y');
+                }
+                return array_unique($annees);
+
+            }catch(\Doctrine\ORM\NoResultException $e){
+              return null;
+            }
 	}
 
 }

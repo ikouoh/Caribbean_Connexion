@@ -2,6 +2,11 @@
 
 class Clip_controller extends Back_Controller {	
 
+    function __construct(){
+        parent::__construct();
+        $this->is_admin();
+    }
+    
 	public function index()	{
 		$a_data = array(
                     "clips" => $this->lib_orm_clip->GetListeClip('id', array())
